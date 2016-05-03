@@ -20,7 +20,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('posts', function () {
-
+    
 });
 
 Route::get('markets', function () {
