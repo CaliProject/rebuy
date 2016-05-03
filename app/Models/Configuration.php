@@ -2,9 +2,9 @@
 
 namespace Rebuy;
 
-use Illuminate\Database\Eloquent\Model;
+use Rebuy\Library\Models\Configuration as Configurable;
 
-class Configuration extends Model {
+class Configuration extends Configurable {
 
-    protected $fillable = ['key', 'value'];
+    
 }
