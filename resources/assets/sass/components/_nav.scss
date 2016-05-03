@@ -1,0 +1,35 @@
+.Nav {
+  height: 65px;
+  background: $primary-dark;
+  color: $primary-light;
+
+  > div {
+    margin-top: 5px;
+  }
+
+  a {
+    color: $primary-light;
+    font-weight: bold;
+
+    &:hover {
+      color: $primary-light-hover;
+      background: none !important;
+    }
+  }
+
+  .navbar-brand {
+    padding: 8px 20px;
+
+    img {
+      max-height: 100%;
+    }
+  }
+
+  .navbar-toggle {
+    border-color: #fee;
+
+    .icon-bar {
+      background: #fee;
+    }
+  }
+}

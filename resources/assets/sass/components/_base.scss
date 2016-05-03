@@ -1,0 +1,10 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $font;
+  padding-top: 60px;
+}
+
+a:hover {
+  text-decoration: none;
+}

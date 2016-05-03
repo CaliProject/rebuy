@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "cali/rebuy",
+    "description": "The Rebuy Project.",
+    "keywords": ["Rebuy", "Cali"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -17,7 +17,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "app/Models"
         ],
         "psr-4": {
             "Rebuy\\": "app/"

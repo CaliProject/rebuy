@@ -1,2 +1,15 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+/* Bootstrap core */
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+@import "mixins";
+
+// Fonts and color settings.
+@import "components/settings";
+@import "components/base";
+@import "components/nav";
+@import "components/carousel";
+@import "components/footer";
+@import "components/utilities";
+
+@import "components/posts";
+@import "components/blogs";

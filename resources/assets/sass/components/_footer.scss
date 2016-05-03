@@ -1,0 +1,20 @@
+.Footer {
+  text-align: center;
+  padding: 60px 50px;
+  background: $primary-dark;
+  color: $primary-light;
+
+  a {
+    color: $primary-light;
+
+    &:hover {
+      color: $primary-light-hover;
+    }
+  }
+}
+
+.copyright {
+  p {
+    font-size: 1.2em;
+  }
+}

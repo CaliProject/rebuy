@@ -1,0 +1,82 @@
+.carousel {
+  height: $carousel-height;
+  margin-bottom: 60px;
+  overflow-x: hidden;
+
+  .carousel-control {
+    @include ts();
+
+    .fa {
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      display: inline-block;
+      font-size: 1.8em;
+    }
+
+    &.left {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.0001) 90%);
+      left: -4.5%;
+    }
+
+    &.right {
+      background: linear-gradient(to left, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.0001) 90%);
+      right: -4.5%;
+    }
+
+    &:focus {
+      opacity: .5 !important;
+    }
+
+    &:hover {
+      opacity: .8 !important;
+    }
+  }
+
+  .carousel-caption {
+    z-index: 10;
+    bottom: 20px;
+  }
+
+  .item {
+    height: $carousel-height;
+    background-color: #777;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: $carousel-height;
+    }
+
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 125px;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+    }
+  }
+
+  .carousel-indicators li {
+    width: 35px;
+    height: 6px;
+    margin: 0;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.5);
+    @include ts();
+
+    &.active {
+      width: 35px;
+      height: 6px;
+      background: $primary-light;
+    }
+  }
+}

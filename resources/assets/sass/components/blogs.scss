@@ -1,0 +1,93 @@
+.blogs {
+  .left-side,.right-side {
+    @extend .col-sm-6;
+  }
+
+  .blog-list {
+    list-style: none;
+    padding-left: 10px;
+
+    .blog-item {
+      margin: 1.2em .7em;
+    }
+
+    .post-title {
+      font-weight: 600;
+      color: #222;
+    }
+
+    time {
+      color: #a9a9a9;
+    }
+
+    .blog-post.sticky-post {
+      a {
+        display: block;
+        position: relative;
+
+        &:hover {
+          .thumbnail {
+            &:before, &:after {
+              opacity: 1 !important;
+            }
+          }
+        }
+
+        .thumbnail {
+          position: relative;
+
+          &:before, &:after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: block;
+          }
+
+          &:before {
+            width: 100%;
+            content: '';
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            @include ts();
+          }
+
+          &:after {
+            width: 100%;
+            line-height: 220px;
+            color: #eee;
+            content: '> 查看文章 <';
+            font-size: 1.25em;
+            text-align: center;
+            opacity: 0;
+            @include ts();
+          }
+        }
+      }
+
+      &:after {
+        display: block;
+        content: '';
+        position: relative;
+        width: 85%;
+        height: 0;
+        border-bottom: 1px dashed rgba(0,0,0, .2);
+        margin: 20px 0;
+        left: 7.5%;
+      }
+    }
+  }
+
+  .sticky-post {
+    .thumbnail {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 4px;
+      overflow: hidden;
+      width: 100%;
+      height: 220px;
+      border: none;
+    }
+  }
+}
