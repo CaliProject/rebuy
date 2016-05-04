@@ -18,9 +18,10 @@
     <!-- Styles -->
     <link href="{{ url('assets/css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <script src="{{ url('assets/js/modernizr.custom.js') }}"></script>
 
 </head>
-<body id="app-layout">
+<body id="app">
 
     @include('layouts.partials.app-navbar')
 
@@ -31,8 +32,16 @@
     @include('layouts.partials.app-footer')
 
     <!-- JavaScripts -->
-    <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{{ url('assets/js/app.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    @stack('scripts.footer')
+
+    @if(isset($errors))
+        <script>
+            @foreach($errors->all() as $error)
+                toastr.error("{!! addslashes($error) !!}");
+            @endforeach
+        </script>
+    @endif
 </body>
 </html>

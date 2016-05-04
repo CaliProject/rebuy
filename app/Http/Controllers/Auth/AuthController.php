@@ -2,14 +2,14 @@
 
 namespace Rebuy\Http\Controllers\Auth;
 
-use Rebuy\User;
 use Validator;
+use Rebuy\User;
 use Rebuy\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Rebuy\Library\Traits\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -31,9 +31,23 @@ class AuthController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * The credential input name.
+     * 
+     * @var string
+     */
+    protected $username = 'credential';
+
+    /**
+     * The multiple factors for authentication.
+     * 
+     * @var array
+     */
+    protected $multiFactors = [
+        'email', 'tel'
+    ];
+    
+    /**
      * Create a new authentication controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -43,29 +57,32 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
+            'tel'      => 'required',
             'password' => 'required|min:6|confirmed',
+            'terms'    => 'required'
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'tel'      => $data['tel'],
             'password' => bcrypt($data['password']),
         ]);
     }

@@ -19,6 +19,14 @@
     border-radius: 3px;
     text-align: center;
     color: #555;
+    @include ts();
+
+    &.hide {
+      -webkit-transform: scale3d(0,0,0);
+      -moz-transform: scale3d(0,0,0);
+      transform: scale3d(0,0,0);
+      display: block !important;
+    }
   }
 }
 

@@ -23,7 +23,8 @@ class CreatePostsTable extends Migration
             $table->longText('body')->nullable();
             // Eligible only when type is 1 (video)
             $table->text('video_src')->nullable();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('cover_id')->nullable();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

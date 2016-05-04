@@ -23,6 +23,14 @@
                 <li><a href="{{ url('/') }}">主页</a></li>
                 <li><a href="{{ url('/posts') }}">文章</a></li>
                 <li><a href="{{ url('/markets') }}">商城</a></li>
+                <li>
+                    <div class="search-bar">
+                        <form :action="'{{ url('search') }}/'+searchText" role="search" novalidate @submit.prevent="search">
+                            <input type="text" v-model="searchText" placeholder="搜索...">
+                            <i class="fa fa-search"></i>
+                        </form>
+                    </div>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

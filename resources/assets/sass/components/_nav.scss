@@ -32,4 +32,44 @@
       background: #fee;
     }
   }
+
+  .search-bar {
+    line-height: 50px;
+    position: relative;
+    margin: 0 10px;
+
+    input[type=text] {
+      height: 30px;
+      border-radius: 15px;
+      border: none;
+      outline: none;
+      color: #999;
+      background: rgba(255,255,255,.25);
+      padding-right: 12px;
+      padding-left: 30px;
+      font-weight: 600;
+      @include ts();
+
+      &:focus,&:hover {
+        background: rgba(255,255,255, .95);
+        + i.fa-search {
+          color: #111;
+        }
+      }
+    }
+
+    i.fa-search {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      margin-top: -7px;
+      color: #999;
+      @include ts();
+    }
+  }
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background: none !important;
+  color: $primary-light-hover;
 }

@@ -1,66 +1,39 @@
 @extends('layouts.app')
 
+@section('title', '登录')
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {!! csrf_field() !!}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i>Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
+    <div class="container">
+        <div class="row">
+            <div class="Login Auth">
+                <div class="form-title">
+                    <span>登录</span>
+                </div>
+                <form action="{{ url('login') }}" method="POST" class="Login__form">
+                    {!! csrf_field() !!}
+                    <span class="input input--rebuy{{ $errors->has('credential') ? ' input--error' : '' }}">
+                        <input class="input__field input__field--rebuy" type="text" id="credential" name="credential" value="{{ old('credential') }}" required/>
+                        <label class="input__label input__label--rebuy" for="credential">
+                            <span class="input__label-content input__label-content--rebuy">邮箱/手机</span>
+                        </label>
+                    </span>
+                    <span class="input input--rebuy{{ $errors->has('password') ? ' input--error' : '' }}">
+                        <input class="input__field input__field--rebuy" type="password" id="password" name="password"
+                               value="{{ old('password') }}" required/>
+                        <label class="input__label input__label--rebuy" for="password">
+                            <span class="input__label-content input__label-content--rebuy">密码</span>
+                        </label>
+                    </span>
+                    <input type="hidden" name="remember" value="true">
+                    <button type="submit" class="btn confirm-button">登录</button>
+                </form>
+                <div class="related">
+                    没有帐号? <a href="{{ url('register') }}">注册</a>
+                    <div class="pull-right">
+                        <a href="{{ url('password/reset') }}">忘记密码?</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

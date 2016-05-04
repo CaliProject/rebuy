@@ -33,7 +33,7 @@
                         </div>
                         <h4 class="post-title">正式登录华为P8</h4>
                     </a>
-                </div>`
+                </div>
                 <div class="post video-post">
                     <a href="#">
                         <div class="cover">

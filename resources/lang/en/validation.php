@@ -113,6 +113,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'     => '昵称',
+        'email'    => '邮箱地址',
+        'tel'      => '手机',
+        'password' => '密码',
+        'terms'    => '条款'
+    ],
 
 ];
