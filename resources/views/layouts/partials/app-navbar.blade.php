@@ -21,8 +21,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/') }}">主页</a></li>
-                <li><a href="{{ url('/posts') }}">文章</a></li>
-                <li><a href="{{ url('/markets') }}">商城</a></li>
+                <li><a href="{{ url('posts') }}">文章</a></li>
+                <li><a href="{{ url('markets') }}">商城</a></li>
                 <li>
                     <div class="search-bar">
                         <form :action="'{{ url('search') }}/'+searchText" role="search" novalidate @submit.prevent="search">
@@ -37,16 +37,18 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">登录</a></li>
-                    <li><a href="{{ url('/register') }}">注册</a></li>
+                    <li><a href="{{ url('login') }}">登录</a></li>
+                    <li><a href="{{ url('register') }}">注册</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <i class="icon-user icon-btn"></i>&nbsp;{{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>&nbsp;注销</a></li>
+                            @if(Auth::user()->isAdmin())
+                                <li><a href="{{ url('manage') }}"><i class="icon-speedometer icon-btn"></i>&nbsp;后台管理</a></li>
+                            @endif
+                            <li><a href="{{ url('logout') }}"><i class="icon-power icon-btn"></i>&nbsp;注销</a></li>
                         </ul>
                     </li>
                 @endif

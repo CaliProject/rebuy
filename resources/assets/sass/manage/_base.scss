@@ -1,0 +1,10 @@
+.Admin {
+  @extend .container;
+
+  .Container {
+    width: calc(100% - 250px - 30px);
+    margin: 2em 15px;
+    float: left;
+    padding: 1.5em .5em;
+  }
+}

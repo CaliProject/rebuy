@@ -69,6 +69,10 @@
   }
 }
 
+.dropdown-menu > li > a {
+  padding: .8em 20px;
+}
+
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background: none !important;
   color: $primary-light-hover;

@@ -26,3 +26,10 @@ Route::get('posts', function () {
 Route::get('markets', function () {
 
 });
+
+Route::group([
+    'prefix' => 'manage',
+    'middleware' => ['auth', 'role:admin']
+], function () {
+    Route::get('/', 'ManageController@index');
+});

@@ -3,6 +3,8 @@
 
 @import "mixins";
 
+@import "fonts/line-icons";
+
 // Fonts and color settings.
 @import "components/settings";
 @import "components/base";
@@ -13,6 +15,7 @@
 
 @import "components/posts";
 @import "components/blogs";
+@import "components/products";
 
 @import "components/auth";
 
@@ -23,3 +26,6 @@
 @import "plugins/input";
 @import "plugins/morph";
 @import "plugins/toastr";
+
+@import "manage/base";
+@import "manage/sidebar";

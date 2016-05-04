@@ -32,20 +32,20 @@ class AuthController extends Controller {
 
     /**
      * The credential input name.
-     * 
+     *
      * @var string
      */
     protected $username = 'credential';
 
     /**
      * The multiple factors for authentication.
-     * 
+     *
      * @var array
      */
     protected $multiFactors = [
         'email', 'tel'
     ];
-    
+
     /**
      * Create a new authentication controller instance.
      */

@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
+@section('title', '主页')
+
 @section('content')
     @include('layouts.partials.app-carousel')
 
     <div class="container" id="content-wrapper">
         <section class="row videos">
             <div class="section-title">
-                <h3>Rebuy出品视频</h3>
+                <h3><i class="icon-film"></i>&nbsp;Rebuy出品视频</h3>
                 <div class="pull-right">
                     <a href="#" class="more">查看更多</a>
                 </div>
@@ -82,7 +84,7 @@
         </section>
         <section class="row blogs">
             <div class="section-title">
-                <h3>Rebuy文章</h3>
+                <h3><i class="icon-notebook"></i>&nbsp;Rebuy文章</h3>
                 <div class="pull-right">
                     <a href="#" class="more">查看更多</a>
                 </div>
@@ -158,10 +160,37 @@
         </section>
         <section class="row markets">
             <div class="section-title">
-                <h3>Rebuy商城</h3>
+                <h3><i class="icon-handbag"></i>&nbsp;Rebuy商城</h3>
+                <div class="pull-right">
+                    <a href="{{ url('markets') }}" class="more">查看更多</a>
+                </div>
             </div>
             <div class="section-content">
-
+                <div class="product-list">
+                    @for($i = 1; $i <= 6; $i++)
+                        <div class="product-item">
+                            <a href="#">
+                                <div class="cover">
+                                    <div class="thumbnail" style="background-image: url('{{ url('assets/images/iphone' . $i . '.jpg') }}')"></div>
+                                </div>
+                                <div class="details">
+                                    <div class="product-name">
+                                        <span>iPhone 6s 64GB 银色</span>
+                                    </div>
+                                    <div class="product-price">
+                                        5099.00
+                                    </div>
+                                    <div class="product-inventory">
+                                        库存: 3
+                                    </div>
+                                    <div class="product-date">
+                                        <time>{{ $i }}小时前</time>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endfor
+                </div>
             </div>
         </section>
     </div>
