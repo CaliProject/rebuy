@@ -24,9 +24,21 @@ Route::get('markets', function () {
 
 });
 
+Route::get('posts/{post}.html', 'HomeController@showPost');
+
+Route::post('upload', 'HomeController@uploadPicture');
+
 Route::group([
     'prefix' => 'manage',
     'middleware' => ['auth', 'role:admin']
 ], function () {
     Route::get('{section?}', 'ManageController@index');
+    
+    Route::group([
+        'prefix' => 'posts'
+    ], function () {
+        Route::get('{post}', 'ManageController@showEditPost');
+        Route::patch('{post}', 'ManageController@updatePost');
+        Route::delete('{post}', 'ManageController@deletePost');
+    });
 });

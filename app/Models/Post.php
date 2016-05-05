@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model {
 
+    protected $fillable = [
+        'title', 'body', 'video_src', 'type', 'sticky'
+    ];
+
+    /**
+     * Items per page.
+     * 
+     * @var int
+     */
+    protected $perPage = 35;
+    
     /**
      * Get the author object.
      * 
@@ -13,7 +24,7 @@ class Post extends Model {
      */
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -34,5 +45,25 @@ class Post extends Model {
     public function likes()
     {
         return Like::count('type', self::class);
+    }
+
+    /**
+     * Shortens the title.
+     * 
+     * @return mixed
+     */
+    public function shortTitle()
+    {
+        return str_limit($this->title, 30);
+    }
+
+    /**
+     * Get the readable type representation.
+     * 
+     * @return string
+     */
+    public function readableType()
+    {
+        return $this->type == 0 ? '文章' : '视频';
     }
 }

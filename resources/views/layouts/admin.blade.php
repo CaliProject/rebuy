@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    @yield('admin.title') - 后台管理
-@stop
+@section('title')@yield('admin.title') - 后台管理@stop
 
 @section('content')
     <div class="Admin">
@@ -19,3 +17,11 @@
 
     </div>
 @stop
+
+@push('head')
+<meta name="_token" content="{{ csrf_token() }}">
+@endpush
+
+@push('scripts.footer')
+<script src="{{ url('assets/js/admin.js') }}"></script>
+@endpush

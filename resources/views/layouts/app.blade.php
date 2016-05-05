@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title') | Rebuy</title>
+    <title>
+
+        @yield('title') | Rebuy
+
+    </title>
 
     <link rel="icon" href="{{ url('assets/logo.png') }}">
     <link rel="shortcut icon" href="{{ url('assets/logo.png') }}">
@@ -19,6 +23,8 @@
     <link href="{{ url('assets/css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <script src="{{ url('assets/js/modernizr.custom.js') }}"></script>
+
+    @stack('head')
 
 </head>
 <body id="app">

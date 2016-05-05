@@ -12,13 +12,16 @@ require('laravel-elixir-vueify');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.sass('app.scss', 'public/assets/css/app.css');
-    
+
     mix.browserify([
-        'app.js'
-    ], 'resources/assets/js/builds/app.js');
-    
+            'app.js'
+        ], 'resources/assets/js/builds/app.js')
+        .browserify([
+            'admin.js'
+        ], 'resources/assets/js/builds/admin.js');
+
     mix.scripts([
         'plugins/jquery.min.js',
         'plugins/classie.js',
@@ -26,6 +29,14 @@ elixir(function(mix) {
         'plugins/pace.min.js',
         'plugins/uiMorphingButton_fixed.js',
         'plugins/toastr.min.js',
+        'plugins/sweetalert.min.js',
         'builds/app.js'
     ], 'public/assets/js/app.js');
+
+    mix.scripts([
+        'plugins/summernote.min.js',
+        'plugins/summernote-zh-CN.min.js',
+        'builds/admin.js'
+    ], 'public/assets/js/admin.js');
+
 });

@@ -2,7 +2,7 @@
 
 namespace Rebuy\Library\Traits;
 
-class APIResponse {
+trait APIResponse {
 
     /**
      * Return success response accordingly.

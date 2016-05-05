@@ -3,6 +3,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: $font;
   padding-top: 60px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($primary-light, .85);
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba($primary-dark, .7);
+  }
 }
 
 *, :after, :before {

@@ -55,3 +55,50 @@
     }
   }
 }
+
+.Form {
+  position: relative;
+
+  .form-group {
+    position: relative;
+  }
+
+  .form-control {
+    border: 1px solid rgba(0,0,0,.1);
+    padding: .5em .6em;
+    height: auto;
+
+    &.important {
+      padding: .7em;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    &[required] * label:before {
+      content: '*';
+      display: inline-block;
+      margin: 0 .4em;
+      color: red;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
+
+  .confirm-button {
+    padding: 1em;
+    font-weight: bold;
+    clear: both;
+    border: none !important;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    width: 100%;
+    max-width: 100%;
+
+    &:hover {
+      background: $primary-dark;
+      color: #eee;
+    }
+  }
+}

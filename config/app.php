@@ -155,6 +155,7 @@ return [
         Rebuy\Providers\AuthServiceProvider::class,
         Rebuy\Providers\EventServiceProvider::class,
         Rebuy\Providers\RouteServiceProvider::class,
+        Rebuy\Providers\ViewComposerServiceProvider::class
 
     ],
 
