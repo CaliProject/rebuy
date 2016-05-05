@@ -5,25 +5,15 @@ namespace Rebuy\Http\Controllers;
 use Rebuy\Http\Requests;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class HomeController extends Controller {
 
     /**
-     * Show the application dashboard.
+     * Show the application welcome page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        return view('welcome');
     }
 }

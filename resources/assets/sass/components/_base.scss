@@ -5,6 +5,32 @@ body {
   padding-top: 60px;
 }
 
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: $primary-dark;
+  color: $primary-light-hover;
+}
+
+::-moz-selection {
+  background: $primary-dark;
+  color: $primary-light-hover;
+}
+
 a:hover {
   text-decoration: none;
+}
+
+.Panel {
+  @extend .panel;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .Content:after, .Content:before {
+    display: table;
+    content: " ";
+    clear: both;
+  }
 }

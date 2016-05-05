@@ -25,6 +25,9 @@ class CreatePostsTable extends Migration
             $table->text('video_src')->nullable();
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('cover_id')->nullable();
+
+            $table->boolean('sticky');
+
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

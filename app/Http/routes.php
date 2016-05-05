@@ -11,13 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::get('posts', function () {
     
@@ -31,5 +28,5 @@ Route::group([
     'prefix' => 'manage',
     'middleware' => ['auth', 'role:admin']
 ], function () {
-    Route::get('/', 'ManageController@index');
+    Route::get('{section?}', 'ManageController@index');
 });

@@ -13,9 +13,18 @@
 
 $factory->define(Rebuy\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
+        'name'           => $faker->name,
+        'email'          => $faker->safeEmail,
+        'password'       => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(\Rebuy\Post::class, function (Faker\Generator $faker) {
+    return [
+        'type' => 0,
+        'title' => $faker->sentence,
+        'body' => $faker->realText(),
+        'user_id' => $faker->randomElement(\Rebuy\User::lists('id')->toArray())
     ];
 });

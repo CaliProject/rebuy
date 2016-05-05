@@ -2,37 +2,61 @@
   position: relative;
   left: 0;
   top: 10px;
-  width: 250px;
+  width: 220px;
   float: left;
   margin: 2em 0;
-
 
   .sidebar-links {
     list-style: none;
     padding: 0;
 
     li > a {
-      padding: 1.2em 1.5em;
+      position: relative;
+      padding: 1.1em 1.5em;
       display: block;
       font-weight: 500;
-      text-align: center;
       background: #f5f5f5;
       margin: .55em 0;
       border-radius: 1px;
       font-size: 1.1em;
-      box-shadow: 0 1px 5px rgba(220,220,220,0.5);
+      box-shadow: 0 1px 5px rgba(220, 220, 220, 0.5);
       @include ts(all ease .2s);
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 3px;
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAyCAMAAABI+VrBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALFQTFRF/////f39/v7+/Pz8+/v7+fn56+vr+vr69PT09vb28/Pz9fX1xcXF9/f3+Pj45+fn8PDwycnJ7+/v6enpzc3N19fX8fHx8vLy7u7u6Ojo7Ozs3Nzc5OTk7e3t4uLi2dnZ39/fxsbG29vb0dHR3d3d4ODg4+Pj6urqyMjI09PT5eXl0NDQ1dXV2NjYysrKx8fH5ubmzs7O3t7exMTE4eHh2tray8vLz8/PzMzM1NTU1tbWhgtdWwAAAOFJREFUeNok0NWSxCAURdFDhCQkMx3tuLe7jP//h829NC+rqIKNAK8hhGEQjmUyrm+ziVTs50O6jkA6b+J3gSCqpWfiGZxL1yKyhbIQEDQLxj7xTYy7SXoCY1RXbwLXy6OgfdevIbYFdulHaBuI7t3SIY5Nbhm4zAdF/Ow5gvTEEaR/W49Ov2eSIvjuW+Y4tdTCXHML+1XI/A7cwmmdM1nHLZwbl+kPPj9lunELq5LuRWy5hUFyC+uKI+hazabgCJpYcws5gsXS5F8qc02i9C9Jn9ejelHoMkJdhrJ5xb8AAwBmihB0TS21nQAAAABJRU5ErkJggg==') no-repeat;
+        height: 100%;
+        right: -3px;
+        top: 0px;
+        opacity: 0;
+        @include ts();
+      }
 
       &:hover, &.selected {
         border-bottom: 5px solid;
+
+        &:after {
+          opacity: 1;
+        }
       }
 
       &:hover:not(.selected) {
         -webkit-transform: translateY(-5px);
         -moz-transform: translateY(-5px);
         -ms-transform: translateY(-5px);
-        -o-transform: translateY(-5px);
         transform: translateY(-5px);
+      }
+
+      .icon-btn {
+        margin-right: 10px;
+        font-weight: 700;
+      }
+
+      &:not(.selected) {
+        color: #777;
       }
     }
   }

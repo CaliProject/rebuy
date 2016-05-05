@@ -2,10 +2,13 @@
 
 namespace Rebuy;
 
+use Rebuy\Library\Traits\TimeSortable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
 
+    use TimeSortable;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -53,4 +56,5 @@ class User extends Authenticatable {
     {
         return $this->hasMany(Like::class);
     }
+
 }

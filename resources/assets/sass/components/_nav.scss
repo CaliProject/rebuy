@@ -73,7 +73,7 @@
   padding: .8em 20px;
 }
 
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+.nav .open > a, .nav a:active {
   background: none !important;
   color: $primary-light-hover;
 }
