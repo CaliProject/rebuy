@@ -2,11 +2,12 @@
 
 namespace Rebuy\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Rebuy\Post;
+use Rebuy\User;
+use Illuminate\Support\ServiceProvider;
 
-class ViewComposerServiceProvider extends ServiceProvider
-{
+class ViewComposerServiceProvider extends ServiceProvider {
+
     /**
      * Bootstrap the application services.
      *
@@ -35,7 +36,13 @@ class ViewComposerServiceProvider extends ServiceProvider
         // Posts
         view()->composer("manage.posts.index", function ($view) {
             return $view->with([
-                'posts' => Post::paginate()
+                'posts' => Post::stickyFirst()->paginate()
+            ]);
+        });
+
+        view()->composer("manage.users.index", function ($view) {
+            return $view->with([
+                'users' => User::paginate()
             ]);
         });
     }

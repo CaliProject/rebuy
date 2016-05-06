@@ -23,6 +23,26 @@ $(() => {
             return false;
         }); 
     });
+    
+    $(".confirm-button.delete").each(function () {
+        $(this).on('click', (ev) => {
+            ev.preventDefault();
+            let redirect = $(this).attr('redirect');
+    
+            admin.showWarningAlert({
+                title: '确定该删除操作?',
+                text: '删除后将无法撤销',
+                confirm: '我确认!',
+                cancel: '手贱了'
+            }, () => {
+                deleteRecord(window.location.href, 'DELETE', null, null, () => {
+                    setTimeout(() => window.location.href = redirect, 500);
+                });
+            });
+    
+            return false;
+        });
+    });
 
     $(".edit-btn").each(function () {
         $(this).on('click', (ev) => {
@@ -34,7 +54,7 @@ $(() => {
         });
     });
 
-    function deleteRecord(url, type, ids, action) {
+    function deleteRecord(url, type, ids, action, callback) {
         $.ajax({
             url: url,
             type: type,
@@ -54,6 +74,9 @@ $(() => {
                     });
                     $(`tr[data-id=${targetId}]`).fadeOut();
                     setTimeout(() => $(`tr[data-id=${targetId}]`).remove(), 500);
+                    if (callback) {
+                        callback();
+                    }
                 } else {
                     toastr.error(data.message);
                 }
@@ -68,7 +91,31 @@ $(() => {
         lang: 'zh-CN',
         callbacks: {
             onImageUpload: (files) => {
+                if (files.length) {
+                    $(files).each(function () {
+                        let $data = new FormData();
+                        $data.append('image', this);
 
+                        $.ajax({
+                            url: '/upload',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $data,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            contentType: false,
+                            success(data) {
+                                if (data.status != 'error')
+                                    $("[editor]").summernote('insertImage', data.url);
+                                else
+                                    toastr.error(data.message);
+                            },
+                            error(er) {
+                                toastr.error(er.responseText);
+                            }
+                        });
+                    });
+                }
             }
         }
     });

@@ -42,6 +42,31 @@ class ManageController extends Controller {
     }
 
     /**
+     * Show create page for posts.
+     * 
+     * @return mixed
+     */
+    public function showCreatePost()
+    {
+        return view('manage.posts.create', ['post' => new Post]);
+    }
+
+    /**
+     * Creates a post.
+     * 
+     * @param PostFormRequest $request
+     * @return array
+     */
+    public function createPost(PostFormRequest $request)
+    {
+        $post = $request->user()->posts()->create($request->all());
+        
+        return $post ? $this->successResponse([
+            'redirect' => url('manage/posts')
+        ]) : $this->errorResponse('文章创建失败');
+    }
+
+    /**
      * Updates a post.
      *
      * @param Post                    $post
@@ -52,7 +77,7 @@ class ManageController extends Controller {
     {
         $post->update($request->only($post->getFillable()));
         
-        return $this->successResponse();
+        return $this->successResponse('文章更新成功');
     }
 
     /**

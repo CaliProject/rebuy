@@ -33,19 +33,43 @@ $(function () {
         });
     });
 
-    $(".edit-btn").each(function () {
+    $(".confirm-button.delete").each(function () {
         var _this2 = this;
 
         $(this).on('click', function (ev) {
             ev.preventDefault();
+            var redirect = $(_this2).attr('redirect');
 
-            window.location.href = $($(_this2).parents("table")[0]).attr('action-url') + '/' + $($(_this2).parents("tr")[0]).attr('data-id');
+            admin.showWarningAlert({
+                title: '确定该删除操作?',
+                text: '删除后将无法撤销',
+                confirm: '我确认!',
+                cancel: '手贱了'
+            }, function () {
+                deleteRecord(window.location.href, 'DELETE', null, null, function () {
+                    setTimeout(function () {
+                        return window.location.href = redirect;
+                    }, 500);
+                });
+            });
 
             return false;
         });
     });
 
-    function deleteRecord(url, type, ids, action) {
+    $(".edit-btn").each(function () {
+        var _this3 = this;
+
+        $(this).on('click', function (ev) {
+            ev.preventDefault();
+
+            window.location.href = $($(_this3).parents("table")[0]).attr('action-url') + '/' + $($(_this3).parents("tr")[0]).attr('data-id');
+
+            return false;
+        });
+    });
+
+    function deleteRecord(url, type, ids, action, callback) {
         $.ajax({
             url: url,
             type: type,
@@ -67,6 +91,9 @@ $(function () {
                     setTimeout(function () {
                         return $("tr[data-id=" + targetId + "]").remove();
                     }, 500);
+                    if (callback) {
+                        callback();
+                    }
                 } else {
                     toastr.error(data.message);
                 }
@@ -80,7 +107,30 @@ $(function () {
     $("[editor]").summernote({
         lang: 'zh-CN',
         callbacks: {
-            onImageUpload: function onImageUpload(files) {}
+            onImageUpload: function onImageUpload(files) {
+                if (files.length) {
+                    $(files).each(function () {
+                        var $data = new FormData();
+                        $data.append('image', this);
+
+                        $.ajax({
+                            url: '/upload',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: $data,
+                            enctype: 'multipart/form-data',
+                            processData: false,
+                            contentType: false,
+                            success: function success(data) {
+                                if (data.status != 'error') $("[editor]").summernote('insertImage', data.url);else toastr.error(data.message);
+                            },
+                            error: function error(er) {
+                                toastr.error(er.responseText);
+                            }
+                        });
+                    });
+                }
+            }
         }
     });
 });

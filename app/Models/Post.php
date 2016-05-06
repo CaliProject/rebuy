@@ -66,4 +66,15 @@ class Post extends Model {
     {
         return $this->type == 0 ? '文章' : '视频';
     }
+
+    /**
+     * Get by the sticky first order.
+     * 
+     * @param $query
+     * @return mixed
+     */
+    public function scopeStickyFirst($query)
+    {
+        return $query->orderBy('sticky', 'desc');
+    }
 }

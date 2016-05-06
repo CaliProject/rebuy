@@ -57,4 +57,13 @@ class User extends Authenticatable {
         return $this->hasMany(Like::class);
     }
 
+    /**
+     * Get the user's media.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function media()
+    {
+        return $this->hasMany(Media::class);
+    }
 }

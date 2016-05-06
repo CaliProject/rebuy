@@ -24,8 +24,9 @@ class PostFormRequest extends Request {
     public function rules()
     {
         return [
-            'title' => 'required',
-            'body'  => 'required'
+            'title'     => 'required',
+            'body'      => 'required',
+            'video_src' => 'required_if:type,1|url'
         ];
     }
 }

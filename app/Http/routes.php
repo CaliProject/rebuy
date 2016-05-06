@@ -37,6 +37,8 @@ Route::group([
     Route::group([
         'prefix' => 'posts'
     ], function () {
+        Route::get('create', 'ManageController@showCreatePost');
+        Route::post('create', 'ManageController@createPost');
         Route::get('{post}', 'ManageController@showEditPost');
         Route::patch('{post}', 'ManageController@updatePost');
         Route::delete('{post}', 'ManageController@deletePost');

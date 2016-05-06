@@ -5,7 +5,13 @@
 @section('admin.content')
     <div class="row">
         <div class="col-sm-12">
-            <table class="posts-table table table-responsive table-hover" action-url="{{ url('manage/posts') }}">
+            <blockquote>
+                <b>文章总数: {{ $posts->total() }}</b>
+                <a class="pull-right" href="{{ url('manage/posts/create') }}"><i class="icon-plus fa-2x"></i></a>
+            </blockquote>
+        </div>
+        <div class="col-sm-12">
+            <table class="posts-table table table-responsive table-hover Table" action-url="{{ url('manage/posts') }}">
                 <thead>
                 <tr>
                     <th>标题</th>

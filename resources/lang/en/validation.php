@@ -114,11 +114,15 @@ return [
     */
 
     'attributes' => [
-        'name'     => '昵称',
-        'email'    => '邮箱地址',
-        'tel'      => '手机',
-        'password' => '密码',
-        'terms'    => '条款'
+        'name'      => '昵称',
+        'email'     => '邮箱地址',
+        'tel'       => '手机',
+        'password'  => '密码',
+        'terms'     => '条款',
+        'title'     => '标题',
+        'body'      => '内容',
+        'type'      => '文章类型',
+        'video_src' => '视频链接'
     ],
 
 ];

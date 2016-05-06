@@ -2,11 +2,15 @@
 
 namespace Rebuy\Http\Controllers;
 
+use Rebuy\Media;
+use Rebuy\Post;
 use Rebuy\Http\Requests;
 use Illuminate\Http\Request;
-use Rebuy\Post;
+use Rebuy\Library\Traits\APIResponse;
 
 class HomeController extends Controller {
+
+    use APIResponse;
 
     /**
      * HomeController constructor.
@@ -31,8 +35,22 @@ class HomeController extends Controller {
         return $post;
     }
 
+    /**
+     * Upload handler.
+     *
+     * @param Request $request
+     * @return array
+     */
     public function uploadPicture(Request $request)
     {
-        
+        $file = $request->file('image');
+        $path = sha1(time() . str_random() . $file->getFilename()) . '.' . $file->getClientOriginalExtension();
+        $file->move('uploads', $path);
+
+        $request->user()->media()->create(compact('path'));
+
+        return $this->successResponse([
+            'url' => url('uploads/' . $path)
+        ]);
     }
 }

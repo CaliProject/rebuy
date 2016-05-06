@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model {
 
+    /**
+     * Mass assignable attributes.
+     * 
+     * @var array
+     */
     protected $fillable = ['path'];
 
     /**

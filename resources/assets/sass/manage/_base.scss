@@ -56,11 +56,22 @@
   }
 }
 
+.Table {
+  td {
+    line-height: 45px !important;
+    border-top: 1px dashed #e3e3e3 !important;
+  }
+}
+
 .Form {
   position: relative;
 
   .form-group {
     position: relative;
+
+    &.has-error .form-control {
+      border: 2px solid #a94442 !important;
+    }
   }
 
   .form-control {
@@ -73,14 +84,18 @@
       font-size: 1.1em;
       font-weight: 600;
     }
+  }
 
-    &[required] * label:before {
-      content: '*';
-      display: inline-block;
-      margin: 0 .4em;
-      color: red;
-      font-size: 1.1em;
-      font-weight: bold;
+  .control-label {
+    &[required] {
+      &:before {
+        content: '*';
+        display: inline-block;
+        margin: 0 .4em;
+        color: red;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
     }
   }
 
@@ -100,5 +115,30 @@
       background: $primary-dark;
       color: #eee;
     }
+    
+    &.delete, &.delete:hover {
+      background: #d84944;
+      color: #eee;
+      margin: -.7em 0;
+    }
+  }
+}
+
+.shaky {
+  @include am(shake ease-in-out .7s backwards);
+}
+
+
+@keyframes shake {
+  from, to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-12px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(12px, 0, 0);
   }
 }
