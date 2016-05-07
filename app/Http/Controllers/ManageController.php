@@ -2,6 +2,7 @@
 
 namespace Rebuy\Http\Controllers;
 
+use Rebuy\Comment;
 use Rebuy\Post;
 use Rebuy\User;
 use Illuminate\Http\Request;
@@ -177,12 +178,24 @@ class ManageController extends Controller {
     /**
      * Deletes a user.
      *
-     * @param User $post
+     * @param User $user
      * @return array
      * @throws \Exception
      */
     public function deleteUser(User $user)
     {
         return $user->delete() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
+    }
+
+    /**
+     * Deletes a comment.
+     *
+     * @param Comment $post
+     * @return array
+     * @throws \Exception
+     */
+    public function deleteComment(Comment $comment)
+    {
+        return $comment->delete() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
     }
 }

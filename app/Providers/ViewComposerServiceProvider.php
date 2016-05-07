@@ -2,8 +2,6 @@
 
 namespace Rebuy\Providers;
 
-use Rebuy\Post;
-use Rebuy\User;
 use Illuminate\Support\ServiceProvider;
 
 class ViewComposerServiceProvider extends ServiceProvider {
@@ -36,13 +34,35 @@ class ViewComposerServiceProvider extends ServiceProvider {
         // Posts
         view()->composer("manage.posts.index", function ($view) {
             return $view->with([
-                'posts' => Post::stickyFirst()->paginate()
+                'posts' => \Rebuy\Post::stickyFirst()->paginate()
             ]);
         });
 
+        // Users
         view()->composer("manage.users.index", function ($view) {
             return $view->with([
-                'users' => User::paginate()
+                'users' => \Rebuy\User::paginate()
+            ]);
+        });
+
+        // Comments
+        view()->composer("manage.comments.index", function ($view) {
+            return $view->with([
+                'comments' => \Rebuy\Comment::paginate()
+            ]);
+        });
+        
+        // Media
+        view()->composer("manage.media.index", function ($view) {
+            return $view->with([
+                'media' => \Rebuy\Media::paginate()
+            ]);
+        });
+        
+        // Products
+        view()->composer("manage.products.index", function ($view) {
+            return $view->with([
+                'products' => \Rebuy\Product::paginate()
             ]);
         });
     }

@@ -53,4 +53,20 @@ Route::group([
         Route::patch('{user}', 'ManageController@updateUser');
         Route::delete('{user}', 'ManageController@deleteUser');
     });
+    
+    Route::group([
+        'prefix' => 'comments'
+    ], function () {
+        Route::delete('{comment}', 'ManageController@deleteComment');
+    });
+
+    Route::group([
+        'prefix' => 'markets'
+    ], function () {
+        Route::get('create', 'ManageController@showCreateProduct');
+        Route::post('create', 'ManageController@createProduct');
+        Route::get('{product}', 'ManageController@showEditProduct');
+        Route::patch('{product}', 'ManageController@updateProduct');
+        Route::delete('{product}', 'ManageController@deleteProduct');
+    });
 });

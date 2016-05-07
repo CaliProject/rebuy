@@ -29,3 +29,22 @@ $factory->define(\Rebuy\Post::class, function (Faker\Generator $faker) {
         'user_id' => $faker->randomElement(\Rebuy\User::lists('id')->toArray())
     ];
 });
+
+$factory->define(Rebuy\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'body'    => $faker->sentence,
+        'user_id' => $faker->randomElement(\Rebuy\User::lists('id')->toArray()),
+        'post_id' => $faker->randomElement(\Rebuy\Post::lists('id')->toArray())
+    ];
+});
+
+$factory->define(Rebuy\Product::class, function (Faker\Generator $faker) {
+    return [
+        'name'        => $faker->sentence,
+        'user_id'     => $faker->randomElement(\Rebuy\User::lists('id')->toArray()),
+        'price'       => $faker->randomFloat(),
+        'inventory'   => $faker->randomDigit,
+        'metas'        => "{}",
+        'description' => ''
+    ];
+});
