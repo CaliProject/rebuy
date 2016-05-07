@@ -1,6 +1,8 @@
 .Nav {
   height: 65px;
   background: $primary-dark;
+  background-color: rgba($primary-dark, .8);
+  background-image: linear-gradient(to bottom, $primary-dark, rgba($primary-dark, .4));
   color: $primary-light;
 
   > div {

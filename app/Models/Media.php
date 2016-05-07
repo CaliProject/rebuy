@@ -2,6 +2,7 @@
 
 namespace Rebuy;
 
+use File;
 use Illuminate\Database\Eloquent\Model;
 
 class Media extends Model {
@@ -21,5 +22,18 @@ class Media extends Model {
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Throw it into the trash can.
+     * 
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function trash()
+    {
+        File::delete('uploads/' . $this->path);
+        
+        return $this->delete();
     }
 }

@@ -59,6 +59,12 @@ Route::group([
     ], function () {
         Route::delete('{comment}', 'ManageController@deleteComment');
     });
+    
+    Route::group([
+        'prefix' => 'media'
+    ], function () {
+        Route::delete('{media}', 'ManageController@deleteMedia');
+    });
 
     Route::group([
         'prefix' => 'markets'

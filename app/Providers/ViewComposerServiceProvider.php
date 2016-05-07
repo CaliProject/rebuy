@@ -34,7 +34,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
         // Posts
         view()->composer("manage.posts.index", function ($view) {
             return $view->with([
-                'posts' => \Rebuy\Post::stickyFirst()->paginate()
+                'posts' => \Rebuy\Post::stickyFirst()->latest()->paginate()
             ]);
         });
 
@@ -48,21 +48,21 @@ class ViewComposerServiceProvider extends ServiceProvider {
         // Comments
         view()->composer("manage.comments.index", function ($view) {
             return $view->with([
-                'comments' => \Rebuy\Comment::paginate()
+                'comments' => \Rebuy\Comment::latest()->paginate()
             ]);
         });
         
         // Media
         view()->composer("manage.media.index", function ($view) {
             return $view->with([
-                'media' => \Rebuy\Media::paginate()
+                'media' => \Rebuy\Media::latest()->paginate()
             ]);
         });
         
         // Products
         view()->composer("manage.products.index", function ($view) {
             return $view->with([
-                'products' => \Rebuy\Product::paginate()
+                'products' => \Rebuy\Product::latest()->paginate()
             ]);
         });
     }

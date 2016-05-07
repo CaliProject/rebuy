@@ -2,9 +2,10 @@
 
 namespace Rebuy\Http\Controllers;
 
-use Rebuy\Comment;
 use Rebuy\Post;
 use Rebuy\User;
+use Rebuy\Media;
+use Rebuy\Comment;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
 use Rebuy\Http\Requests\PostFormRequest;
@@ -190,12 +191,24 @@ class ManageController extends Controller {
     /**
      * Deletes a comment.
      *
-     * @param Comment $post
+     * @param Comment $comment
      * @return array
      * @throws \Exception
      */
     public function deleteComment(Comment $comment)
     {
         return $comment->delete() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
+    }
+
+    /**
+     * Deletes a media.
+     *
+     * @param Media $media
+     * @return array
+     * @throws \Exception
+     */
+    public function deleteMedia(Media $media)
+    {
+        return $media->trash() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
     }
 }
