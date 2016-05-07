@@ -119,4 +119,50 @@ $(() => {
             }
         }
     });
+
+    $("form:not(.editor):not([role=search])").on('submit', (e) => {
+        e.preventDefault();
+        const form = e.target,
+            data = $(form).serialize();
+
+        $.ajax({
+            url: form.action,
+            type: $($(form).find("input[name=_method]")[0]).val(),
+            data: data,
+            dataType: 'json',
+            success(data) {
+                if (typeof(data.redirect) == 'undefined') {
+                    if (data.status == 'success') {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                    return false;
+                } else {
+                    window.location.href = data.redirect;
+                    return false;
+                }
+            },
+            error(error) {
+                if (error.status === 422) {
+                    var errors = JSON.parse(error.responseText);
+                    for (let er in errors) {
+                        const sel = `[name=${er}]`,
+                            groupEl = $($(form).find(sel)[0]).parents('.form-group')[0];
+                        // Add error class to the form-group
+                        $(groupEl).addClass('has-error shaky');
+                        setTimeout(() => $(groupEl).removeClass('has-error shaky'), 8000);
+
+                        $(sel).focus();
+                        toastr.error(`<h5>${errors[er][0]}</h5>`);
+                    }
+                } else {
+                    toastr.error(error.responseText);
+                }
+            },
+            complete() {
+                $($(form).find("input[name=body]")[0]).remove();
+            }
+        });
+    });
 });

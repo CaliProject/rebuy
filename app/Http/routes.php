@@ -43,4 +43,14 @@ Route::group([
         Route::patch('{post}', 'ManageController@updatePost');
         Route::delete('{post}', 'ManageController@deletePost');
     });
+    
+    Route::group([
+        'prefix' => 'users'
+    ], function () {
+        Route::get('create', 'ManageController@showCreateUser');
+        Route::post('create', 'ManageController@createUser');
+        Route::get('{user}', 'ManageController@showEditUser');
+        Route::patch('{user}', 'ManageController@updateUser');
+        Route::delete('{user}', 'ManageController@deleteUser');
+    });
 });

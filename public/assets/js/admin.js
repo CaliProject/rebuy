@@ -139,6 +139,59 @@ $(function () {
             }
         }
     });
+
+    $("form:not(.editor):not([role=search])").on('submit', function (e) {
+        e.preventDefault();
+        var form = e.target,
+            data = $(form).serialize();
+
+        $.ajax({
+            url: form.action,
+            type: $($(form).find("input[name=_method]")[0]).val(),
+            data: data,
+            dataType: 'json',
+            success: function success(data) {
+                if (typeof data.redirect == 'undefined') {
+                    if (data.status == 'success') {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                    return false;
+                } else {
+                    window.location.href = data.redirect;
+                    return false;
+                }
+            },
+            error: function error(_error) {
+                if (_error.status === 422) {
+                    var errors = JSON.parse(_error.responseText);
+
+                    var _loop = function _loop(er) {
+                        var sel = "[name=" + er + "]",
+                            groupEl = $($(form).find(sel)[0]).parents('.form-group')[0];
+                        // Add error class to the form-group
+                        $(groupEl).addClass('has-error shaky');
+                        setTimeout(function () {
+                            return $(groupEl).removeClass('has-error shaky');
+                        }, 8000);
+
+                        $(sel).focus();
+                        toastr.error("<h5>" + errors[er][0] + "</h5>");
+                    };
+
+                    for (var er in errors) {
+                        _loop(er);
+                    }
+                } else {
+                    toastr.error(_error.responseText);
+                }
+            },
+            complete: function complete() {
+                $($(form).find("input[name=body]")[0]).remove();
+            }
+        });
+    });
 });
 
 },{"./components/Admin":2}],2:[function(require,module,exports){

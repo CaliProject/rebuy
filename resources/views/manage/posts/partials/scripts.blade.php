@@ -9,11 +9,11 @@
 
         $("form:has([editor])").on('submit', function (e) {
             e.preventDefault();
-            const form = e.target;
+            var form = e.target;
 
             $("<input name='body' value='" + $('[editor]').summernote('code') + "' hidden/>").appendTo($(form));
 
-            const data = $(form).serialize();
+            var data = $(form).serialize();
 
             $.ajax({
                 url: form.action,
@@ -29,7 +29,6 @@
                         }
                         return false;
                     } else {
-                        console.log(data);
                         window.location.href = data.redirect;
                         return false;
                     }
@@ -37,7 +36,7 @@
                 error: function (error) {
                     if (error.status === 422) {
                         var errors = JSON.parse(error.responseText);
-                        for (let er in errors) {
+                        for (var er in errors) {
                             var sel = '[name=' + er +']',
                                     groupEl = $($(form).find(sel)[0]).parents('.form-group')[0];
                             // Add error class to the form-group

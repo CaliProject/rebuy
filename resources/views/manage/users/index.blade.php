@@ -36,7 +36,7 @@
                             <a href="#" class="edit-btn">
                                 <i class="icon-pencil"></i>
                             </a>
-                            @unless(Auth::id() == $user->id)
+                            @unless(Auth::id() === $user->id)
                             <a href="#" class="delete-btn">
                                 <i class="icon-close"></i>
                             </a>

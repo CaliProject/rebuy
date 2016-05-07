@@ -6315,7 +6315,7 @@ body {
   body::-webkit-scrollbar {
     width: 5px; }
   body::-webkit-scrollbar-thumb {
-    background-color: #e5ffb0;
+    background-color: #d9d9d9;
     border-radius: 5px; }
   body::-webkit-scrollbar-button {
     display: none; }

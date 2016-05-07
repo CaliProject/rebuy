@@ -15,7 +15,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'tel'
+        'name', 'email', 'password', 'tel', 'role'
     ];
 
     /**
@@ -26,6 +26,13 @@ class User extends Authenticatable {
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Users per page.
+     * 
+     * @var int
+     */
+    protected $perPage = 30;
 
     /**
      * Determine if the user is an admin.
