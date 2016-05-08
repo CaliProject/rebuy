@@ -49,5 +49,10 @@
             @endforeach
         </script>
     @endif
+    @if(session('status'))
+        <script>
+            toastr['{{ session('status') }}']("{!! addslashes(session('message')) !!}");
+        </script>
+    @endif
 </body>
 </html>

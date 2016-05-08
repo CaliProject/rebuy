@@ -27,6 +27,15 @@ Route::get('markets', function () {
 Route::get('posts/{post}.html', 'HomeController@showPost');
 
 Route::post('upload', 'HomeController@uploadPicture');
+Route::post('upload/avatar', 'HomeController@uploadAvatar');
+
+Route::group([
+    'prefix' => 'profile',
+    'middleware' => ['auth']
+], function () {
+    Route::get('/', 'ProfileController@index');
+    Route::patch('/', 'ProfileController@updateProfile');
+});
 
 Route::group([
     'prefix' => 'manage',

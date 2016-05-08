@@ -70,13 +70,21 @@
       @include ts();
     }
   }
+
+  .avatar {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    margin: 0 .5em;
+  }
 }
 
 .dropdown-menu > li > a {
   padding: .8em 20px;
 }
 
-.nav .open > a, .nav a:active {
-  background: none !important;
+.nav .open > a, .nav a:active, .nav a:focus {
+  background: transparent !important;
   color: $primary-light-hover;
 }

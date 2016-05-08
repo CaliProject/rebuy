@@ -1,0 +1,49 @@
+.Profile {
+  padding: 1em .5em;
+  margin: 3em 0;
+
+  .profile-meta {
+    text-align: center;
+
+    .profile-avatar {
+      border-radius: 50%;
+      width: 95px;
+      height: 95px;
+      overflow: hidden;
+      position: relative;
+      left: 50%;
+      margin-left: calc(95px / #{-2});
+      cursor: pointer;
+      pointer-events: all;
+
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+
+      span {
+        opacity: 0;
+        background: rgba($primary-dark, .75);
+        color: $primary-light;
+        display: block;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        padding: 7px;
+      }
+
+      &:hover {
+        span {
+          opacity: 1;
+        }
+      }
+    }
+
+    .since {
+      display: block;
+      padding: .25em;
+      margin: 10px 0;
+    }
+  }
+}

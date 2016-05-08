@@ -6405,12 +6405,18 @@ a:hover {
       -moz-transition: all ease-in-out 0.3s;
       -ms-transition: all ease-in-out 0.3s;
       -o-transition: all ease-in-out 0.3s; }
+  .Nav .avatar {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    margin: 0 .5em; }
 
 .dropdown-menu > li > a {
   padding: .8em 20px; }
 
-.nav .open > a, .nav a:active {
-  background: none !important;
+.nav .open > a, .nav a:active, .nav a:focus {
+  background: transparent !important;
   color: #ee8900; }
 
 .carousel {
@@ -6753,6 +6759,41 @@ a:hover {
       float: right; }
     .product-list .product-item time {
       color: #a9a9a9; }
+
+.Profile {
+  padding: 1em .5em;
+  margin: 3em 0; }
+  .Profile .profile-meta {
+    text-align: center; }
+    .Profile .profile-meta .profile-avatar {
+      border-radius: 50%;
+      width: 95px;
+      height: 95px;
+      overflow: hidden;
+      position: relative;
+      left: 50%;
+      margin-left: calc(95px / -2);
+      cursor: pointer;
+      pointer-events: all; }
+      .Profile .profile-meta .profile-avatar img {
+        width: 100%;
+        border-radius: 50%; }
+      .Profile .profile-meta .profile-avatar span {
+        opacity: 0;
+        background: rgba(22, 22, 22, 0.75);
+        color: #fff;
+        display: block;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        padding: 7px; }
+      .Profile .profile-meta .profile-avatar:hover span {
+        opacity: 1; }
+    .Profile .profile-meta .since {
+      display: block;
+      padding: .25em;
+      margin: 10px 0; }
 
 .Auth {
   padding: 15px 20px;

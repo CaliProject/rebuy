@@ -43,14 +43,27 @@ class HomeController extends Controller {
      */
     public function uploadPicture(Request $request)
     {
-        $file = $request->file('image');
-        $path = sha1(time() . str_random() . $file->getFilename()) . '.' . $file->getClientOriginalExtension();
-        $file->move('uploads', $path);
+        $path = Media::upload($request);
 
         $request->user()->media()->create(compact('path'));
 
         return $this->successResponse([
             'url' => url('uploads/' . $path)
         ]);
+    }
+
+    /**
+     * Avatar upload handler.
+     * 
+     * @param Request $request
+     * @return array
+     */
+    public function uploadAvatar(Request $request)
+    {
+        $path = Media::upload($request, 'avatars', false);
+
+        $request->user()->uploadsAvatar($path);
+        
+        return $this->successResponse('头像已更新', 'profile');
     }
 }

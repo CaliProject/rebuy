@@ -42,12 +42,13 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="icon-user icon-btn"></i>&nbsp;{{ Auth::user()->name }} <span class="caret"></span>
+                            <img src="{{ Auth::user()->avatarUrl() }}" alt="{{ Auth::user()->name }}的头像" class="avatar">&nbsp;{{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             @if(Auth::user()->isAdmin())
                                 <li><a href="{{ url('manage') }}"><i class="icon-speedometer icon-btn"></i>&nbsp;后台管理</a></li>
                             @endif
+                            <li><a href="{{ url('profile') }}"><i class="icon-note icon-btn"></i>&nbsp;个人资料</a></li>
                             <li><a href="{{ url('logout') }}"><i class="icon-power icon-btn"></i>&nbsp;注销</a></li>
                         </ul>
                     </li>

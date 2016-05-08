@@ -8,6 +8,9 @@ let vm = new Vue({
         },
         search(e) {
             window.location.href = e.target.action;
+        },
+        uploadAvatar() {
+            $("#avatar-uploader").click();
         }
     },
     data: {
@@ -54,6 +57,11 @@ $(() => {
             }
         }
     })();
+    
+    $("#avatar-uploader").on('change', (ev) => {
+        const input = ev.target;
+        $($(input).parents("form")[0]).submit();
+    });
 });
 
 toastr.options = {

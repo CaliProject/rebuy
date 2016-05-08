@@ -10030,6 +10030,9 @@ var vm = new Vue({
         },
         search: function search(e) {
             window.location.href = e.target.action;
+        },
+        uploadAvatar: function uploadAvatar() {
+            $("#avatar-uploader").click();
         }
     },
     data: {
@@ -10078,6 +10081,11 @@ $(function () {
             }
         }
     })();
+
+    $("#avatar-uploader").on('change', function (ev) {
+        var input = ev.target;
+        $($(input).parents("form")[0]).submit();
+    });
 });
 
 toastr.options = {
