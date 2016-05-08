@@ -13,6 +13,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        $this->passThroughCarousel();
         $this->passThroughAdminVariables();
     }
 
@@ -26,6 +27,17 @@ class ViewComposerServiceProvider extends ServiceProvider {
         //
     }
 
+    /**
+     * Pass thru the carousel variables.
+     */
+    protected function passThroughCarousel()
+    {
+        view()->composer("layouts.partials.app-carousel", function ($view) {
+            return $view->with([
+                'bannerPosts' => \Rebuy\Post::bannerPosts()
+            ]);
+        });
+    }
     /**
      * Pass thru the admin variables.
      */

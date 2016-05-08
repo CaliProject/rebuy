@@ -140,6 +140,13 @@ $(function () {
         }
     });
 
+    $("select[tags]").select2({ tags: true });
+
+    Dropzone.options.uploader = {
+        paramName: 'image',
+        dictDefaultMessage: '拖拽或者点击上传图片'
+    };
+
     $("form:not(.editor):not([role=search])").on('submit', function (e) {
         e.preventDefault();
         var form = e.target,

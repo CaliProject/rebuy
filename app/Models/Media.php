@@ -36,4 +36,14 @@ class Media extends Model {
         
         return $this->delete();
     }
+
+    /**
+     * Get the default cover if not provided.
+     * 
+     * @return mixed
+     */
+    public static function defaultCover()
+    {
+        return url('assets/images/default.jpg');
+    }
 }

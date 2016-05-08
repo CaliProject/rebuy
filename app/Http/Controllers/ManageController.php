@@ -63,10 +63,11 @@ class ManageController extends Controller {
     public function createPost(PostFormRequest $request)
     {
         $post = $request->user()->posts()->create($request->all());
+        $post->saveTags($request->input('tags'));
 
-        return $post ? $this->successResponse([
+        return $this->successResponse([
             'redirect' => url('manage/posts')
-        ]) : $this->errorResponse('文章创建失败');
+        ]);
     }
 
     /**
@@ -79,6 +80,7 @@ class ManageController extends Controller {
     public function updatePost(Post $post, PostFormRequest $request)
     {
         $post->update($request->only($post->getFillable()));
+        $post->saveTags($request->input('tags'));
 
         return $this->successResponse('文章更新成功');
     }

@@ -30,7 +30,9 @@
                             {{ str_limit($comment->author->name, 10) }}
                         </td>
                         <td>
-                            {{ str_limit($comment->post->title, 30) }}
+                            <a href="{{ $comment->post->link() }}" target="_blank">
+                                {{ str_limit($comment->post->title, 30) }}
+                            </a>
                         </td>
                         <td>
                             {{ $comment->created_at->diffForHumans() }}

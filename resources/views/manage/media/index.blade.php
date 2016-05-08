@@ -10,9 +10,15 @@
             </blockquote>
         </div>
         <div class="col-sm-12">
+            <form action="{{ url('upload') }}" class="dropzone" id="uploader">
+                {!! csrf_field() !!}
+            </form>
+        </div>
+        <div class="col-sm-12">
             <table class="media-table table table-responsive table-hover Table" action-url="{{ url('manage/media') }}">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>预览</th>
                     <th>上传人</th>
                     <th>发布于</th>
@@ -22,6 +28,9 @@
                 <tbody>
                 @foreach($media as $picture)
                     <tr data-id="{{ $picture->id }}">
+                        <td>
+                            {{ $picture->id }}
+                        </td>
                         <td>
                             <img src="{{ url('uploads/' . $picture->path) }}" alt="图片" class="img-thumbnail" style="max-width: 500px">
                         </td>

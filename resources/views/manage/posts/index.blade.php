@@ -25,7 +25,7 @@
                 @foreach($posts as $post)
                     <tr data-id="{{ $post->id }}">
                         <td>
-                            {{ $post->shortTitle() }}
+                            <a href="{{ $post->link() }}" target="_blank">{{ $post->shortTitle() }}</a>
                             <span class="post-type" post-type="{{ $type = $post->readableType() }}">{{ $type }}</span>
                         </td>
                         <td>{{ $post->author->name }}</td>

@@ -30,6 +30,8 @@ elixir(function (mix) {
         'plugins/uiMorphingButton_fixed.js',
         'plugins/toastr.min.js',
         'plugins/sweetalert.min.js',
+        'plugins/select2.min.js',
+        'plugins/dropzone.min.js',
         'builds/app.js'
     ], 'public/assets/js/app.js');
 

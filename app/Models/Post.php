@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model {
 
     protected $fillable = [
-        'title', 'body', 'video_src', 'type', 'sticky'
+        'title', 'body', 'video_src', 'type', 'sticky', 'cover_id'
     ];
 
     /**
@@ -48,6 +48,16 @@ class Post extends Model {
     }
 
     /**
+     * Tag polymorphism relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    /**
      * Shortens the title.
      * 
      * @return mixed
@@ -76,5 +86,82 @@ class Post extends Model {
     public function scopeStickyFirst($query)
     {
         return $query->orderBy('sticky', 'desc');
+    }
+
+    /**
+     * Save tags relationships.
+     *
+     * @param array $tags
+     * @return $this
+     */
+    public function saveTags(array $tags)
+    {
+        if (count($this->tags)) {
+            $this->tags()->detach($this->tags()->lists('id')->toArray());
+        }
+
+        $this->attachTags($tags);
+
+        return $this;
+    }
+
+    /**
+     * Attach tags onto the post.
+     *
+     * @param array $tags
+     */
+    protected function attachTags(array $tags)
+    {
+        foreach (array_values($tags) as $tag) {
+            if ($t = Tag::getByName($tag)) {
+                $this->tags()->attach($t->id);
+            } else {
+                $this->tags()->create(['name' => $tag]);
+            }
+        }
+    }
+
+    /**
+     * Get the link of the post.
+     * 
+     * @return mixed
+     */
+    public function link()
+    {
+        return url("posts/{$this->id}.html");
+    }
+
+    /**
+     * Get the cover of the post.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    protected function cover()
+    {
+        return $this->belongsTo(Media::class, 'cover_id');
+    }
+
+    /**
+     * Get the cover image url.
+     * 
+     * @return string
+     */
+    public function coverImage()
+    {
+        if (! $this->cover) {
+            return Media::defaultCover();
+        }
+        
+        return url("uploads/{$this->cover->path}");
+    }
+
+    /**
+     * Get the banner posts.
+     * 
+     * @return mixed
+     */
+    public static function bannerPosts()
+    {
+        return static::latest()->where('sticky', 1)->take(5)->get();
     }
 }
