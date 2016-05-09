@@ -16,13 +16,9 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('posts', function () {
-    
-});
-
-Route::get('markets', function () {
-
-});
+Route::get('posts', 'PostsController@posts');
+Route::get('videos', 'PostsController@videos');
+Route::get('markets', 'MarketsController@index');
 
 Route::put('comments/like/{comment}', 'PostsController@likeComment');
 

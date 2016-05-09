@@ -18,5 +18,8 @@
         <li>
             <a href="{{ url('manage/markets') }}" class="{{ request()->is('manage/markets*') ? 'selected' : '' }}"><i class="icon-handbag icon-btn"></i>&nbsp;商品管理</a>
         </li>
+        <li>
+            <a href="{{ url('manage/extras') }}" class="{{ request()->is('manage/extras*') ? 'selected' : '' }}"><i class="icon-magic-wand icon-btn"></i>&nbsp;其他设置</a>
+        </li>
     </ul>
 </aside>

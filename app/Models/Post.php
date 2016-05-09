@@ -240,4 +240,36 @@ class Post extends Model {
     {
         return $this->comments()->whereNull('origin')->orWhere('origin', 0);
     }
+
+    /**
+     * Get only the posts.
+     * 
+     * @param $query
+     * @return mixed
+     */
+    public function scopePostsOnly($query)
+    {
+        return $query->where('type', 0);
+    }
+
+    /**
+     * Get only the videos.
+     * 
+     * @param $query
+     * @return mixed
+     */
+    public function scopeVideosOnly($query)
+    {
+        return $query->where('type', 1);
+    }
+
+    /**
+     * Get the formatted views.
+     * 
+     * @return mixed
+     */
+    public function formattedViews()
+    {
+        return number_format($this->viewsCount());
+    }
 }

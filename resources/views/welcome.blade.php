@@ -10,7 +10,7 @@
             <div class="section-title">
                 <h3><i class="icon-film"></i>&nbsp;Rebuy出品视频</h3>
                 <div class="pull-right">
-                    <a href="#" class="more">查看更多</a>
+                    <a href="{{ url('videos') }}" class="more">查看更多</a>
                 </div>
             </div>
             <div class="section-content">
@@ -86,7 +86,7 @@
             <div class="section-title">
                 <h3><i class="icon-notebook"></i>&nbsp;Rebuy文章</h3>
                 <div class="pull-right">
-                    <a href="#" class="more">查看更多</a>
+                    <a href="{{ url('posts') }}" class="more">查看更多</a>
                 </div>
             </div>
             <div class="section-content">

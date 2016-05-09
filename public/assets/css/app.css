@@ -6710,6 +6710,32 @@ li.on:after {
 .avatar {
   border-radius: 50%; }
 
+.posts-list {
+  list-style: none;
+  padding: .5em 0; }
+  .posts-list li {
+    line-height: 60px;
+    vertical-align: middle;
+    position: relative; }
+    .posts-list li:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1); }
+    .posts-list li a {
+      display: block; }
+  .posts-list .title {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: 600; }
+  .posts-list .author, .posts-list .views {
+    margin: 0 .6em;
+    color: #777;
+    font-weight: 500; }
+  .posts-list time {
+    color: #aaa; }
+
 .blogs .blog-list {
   list-style: none;
   padding-left: 10px; }

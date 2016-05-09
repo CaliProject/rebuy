@@ -22,6 +22,7 @@
             <ul class="nav navbar-nav">
                 <li{{ request()->is('/') ? ' class=on' : '' }}><a href="{{ url('/') }}">主页</a></li>
                 <li{{ request()->is('posts*') ? ' class=on' : '' }}><a href="{{ url('posts') }}">文章</a></li>
+                <li{{ request()->is('videos*') ? ' class=on' : '' }}><a href="{{ url('videos') }}">视频</a></li>
                 <li{{ request()->is('markets*') ? ' class=on' : '' }}><a href="{{ url('markets') }}">商城</a></li>
                 <li>
                     <div class="search-bar">
@@ -48,7 +49,8 @@
                             @if(Auth::user()->isAdmin())
                                 <li><a href="{{ url('manage') }}"><i class="icon-speedometer icon-btn"></i>&nbsp;后台管理</a></li>
                             @endif
-                            <li><a href="{{ url('profile') }}"><i class="icon-note icon-btn"></i>&nbsp;个人资料</a></li>
+                            <li><a href="{{ Auth::user()->profileLink() }}"><i class="icon-compass icon-btn"></i>&nbsp;个人主页</a></li>
+                            <li><a href="{{ url('profile') }}"><i class="icon-note icon-btn"></i>&nbsp;修改资料</a></li>
                             <li><a href="{{ url('logout') }}"><i class="icon-power icon-btn"></i>&nbsp;注销</a></li>
                         </ul>
                     </li>

@@ -6,6 +6,7 @@ use Rebuy\Post;
 use Rebuy\Comment;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
+use Rebuy\View;
 
 class PostsController extends Controller {
 
@@ -22,6 +23,32 @@ class PostsController extends Controller {
     }
 
     /**
+     * Show the posts.
+     * 
+     * @return mixed
+     */
+    public function posts()
+    {
+        $posts = Post::latest()->postsOnly()->paginate();
+        $type = 0;
+
+        return view('posts', compact('posts', 'type'));
+    }
+
+    /**
+     * Show the videos.
+     * 
+     * @return mixed
+     */
+    public function videos()
+    {
+        $posts = Post::latest()->videosOnly()->paginate();
+        $type = 1;
+
+        return view('posts', compact('posts', 'type'));
+    }
+
+    /**
      * Show the post.
      *
      * @param Post $post
@@ -29,6 +56,7 @@ class PostsController extends Controller {
      */
     public function show(Post $post)
     {
+        $post->views()->save(new View);
         $comments = $post->superComments()->paginate($this->perPage);
 
         return view('posts.show', compact('post', 'comments'));
