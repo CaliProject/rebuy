@@ -20,9 +20,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/') }}">主页</a></li>
-                <li><a href="{{ url('posts') }}">文章</a></li>
-                <li><a href="{{ url('markets') }}">商城</a></li>
+                <li{{ request()->is('/') ? ' class=on' : '' }}><a href="{{ url('/') }}">主页</a></li>
+                <li{{ request()->is('posts*') ? ' class=on' : '' }}><a href="{{ url('posts') }}">文章</a></li>
+                <li{{ request()->is('markets*') ? ' class=on' : '' }}><a href="{{ url('markets') }}">商城</a></li>
                 <li>
                     <div class="search-bar">
                         <form :action="'{{ url('search') }}/'+searchText" role="search" novalidate @submit.prevent="search">

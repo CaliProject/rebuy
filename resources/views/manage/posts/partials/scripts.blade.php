@@ -11,7 +11,7 @@
             e.preventDefault();
             var form = e.target;
 
-            $("<input name='body' value='" + $('[editor]').summernote('code') + "' hidden/>").appendTo($(form));
+            $("<textarea name='body' class='hidden'>" + $('[editor]').summernote('code') + "</textarea>").appendTo($(form));
 
             var data = $(form).serialize();
 
@@ -53,7 +53,7 @@
                     }
                 },
                 complete: function () {
-                    $($(form).find("input[name=body]")[0]).remove();
+                    $($(form).find("textarea[name=body]")[0]).remove();
                 }
             });
         });

@@ -30,11 +30,6 @@ class HomeController extends Controller {
         return view('welcome');
     }
 
-    public function showPost(Post $post)
-    {
-        return $post;
-    }
-
     /**
      * Upload handler.
      *

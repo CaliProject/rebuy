@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model {
 
+    protected $fillable = [
+        'post_id', 'user_id', 'body', 'origin'
+    ];
+
     /**
      * Whose comment this is.
      *
@@ -28,12 +32,22 @@ class Comment extends Model {
 
     /**
      * How many likes it has.
-     * 
-     * @return int
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function likes()
     {
-        return Like::count('type', self::class);
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+    /**
+     * Get the count of likes.
+     * 
+     * @return int
+     */
+    public function likesCount()
+    {
+        return $this->likes()->count();
     }
 
     /**
@@ -57,5 +71,25 @@ class Comment extends Model {
     public function hasParent()
     {
         return $this->origin !== null && $this->origin !== 0;
+    }
+
+    /**
+     * Children comments
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(static::class, 'origin');
+    }
+
+    /**
+     * Reply link to be prepended.
+     *
+     * @return string
+     */
+    public function replyLink()
+    {
+        return "<a class=\"at\" href=\"" . $this->author->profileLink() . "\">@" . $this->author->name ."</a>";
     }
 }

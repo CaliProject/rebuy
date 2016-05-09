@@ -120,4 +120,35 @@ class User extends Authenticatable {
         
         return $this->avatar ? $this->avatar()->update($attr) : $this->avatar()->create($attr); 
     }
+
+    /**
+     * Get the user's profile link.
+     * 
+     * @return mixed
+     */
+    public function profileLink()
+    {
+        return url("@{$this->name}");
+    }
+
+    /**
+     * User's liked comments.
+     * 
+     * @return mixed
+     */
+    public function likedComments()
+    {
+        return $this->likes()->where('likeable_type', Comment::class)->get(['likeable_id']);
+    }
+
+    /**
+     * If the user has liked the given comment.
+     * 
+     * @param Comment $comment
+     * @return bool
+     */
+    public function likedComment(Comment $comment)
+    {
+        return in_array($comment->id, array_flatten($this->likedComments()->toArray()));
+    }
 }

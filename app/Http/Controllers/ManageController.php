@@ -127,7 +127,7 @@ class ManageController extends Controller {
     public function createUser(Request $request)
     {
         $this->validate($request, [
-            'name'     => 'required|max:255',
+            'name'     => 'required|max:255|unique:users',
             'email'    => 'required|email|max:255|unique:users',
             'tel'      => 'required|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -155,7 +155,7 @@ class ManageController extends Controller {
     public function updateUser(User $user, Request $request)
     {
         $this->validate($request, [
-            'name'  => 'required|max:255',
+            'name'  => 'required|max:255|unique:users,name,' . $user->id,
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'tel'   => 'required|unique:users,tel,' . $user->id,
             'role'  => 'in:member,admin'

@@ -27,12 +27,12 @@ body {
 }
 
 ::selection {
-  background: $primary-dark;
+  background: rgba($primary-dark, .95);
   color: $primary-light-hover;
 }
 
 ::-moz-selection {
-  background: $primary-dark;
+  background: rgba($primary-dark, .95);
   color: $primary-light-hover;
 }
 
@@ -49,5 +49,24 @@ a:hover {
     display: table;
     content: " ";
     clear: both;
+  }
+}
+
+.Breadcrumb {
+  @extend .breadcrumb;
+  padding: 1.5em .5em;
+  margin: 20px 0;
+  background: #fefefe;
+  
+  li {
+    color: #ccc;
+    
+    a {
+      color: rgba($primary-dark, .6);
+    }
+    
+    &.active {
+      color: #ccc !important;
+    }
   }
 }

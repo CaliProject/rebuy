@@ -38,13 +38,33 @@ class Post extends Model {
     }
 
     /**
+     * Get the comments count.
+     *
+     * @return mixed
+     */
+    public function commentsCount()
+    {
+        return $this->comments()->count();
+    }
+
+    /**
      * How many likes it has.
      *
-     * @return int
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function likes()
     {
-        return Like::count('type', self::class);
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+    /**
+     * Get the count of likes.
+     *
+     * @return int
+     */
+    public function likesCount()
+    {
+        return $this->likes()->count();
     }
 
     /**
@@ -55,6 +75,26 @@ class Post extends Model {
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    /**
+     * Get the views of the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function views()
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
+
+    /**
+     * Get the views count.
+     * 
+     * @return mixed
+     */
+    public function viewsCount()
+    {
+        return $this->views()->count();
     }
 
     /**
@@ -163,5 +203,41 @@ class Post extends Model {
     public static function bannerPosts()
     {
         return static::latest()->where('sticky', 1)->take(5)->get();
+    }
+
+    /**
+     * Get the previous post.
+     * 
+     * @return mixed
+     */
+    public function previous()
+    {
+        return static::where([
+            ['created_at', '<', $this->created_at],
+            ['id', '!=', $this->id]
+        ])->first();
+    }
+
+    /**
+     * Get the next post.
+     * 
+     * @return mixed
+     */
+    public function next()
+    {
+        return static::where([
+            ['created_at', '>', $this->created_at],
+            ['id', '!=', $this->id]
+        ])->first();
+    }
+
+    /**
+     * Get all the super comments.
+     * 
+     * @return mixed
+     */
+    public function superComments()
+    {
+        return $this->comments()->whereNull('origin')->orWhere('origin', 0);
     }
 }

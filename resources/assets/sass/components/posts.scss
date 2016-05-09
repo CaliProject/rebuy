@@ -98,3 +98,113 @@
     }
   }
 }
+
+.Post {
+  margin: 1em 0;
+  padding: .5em;
+
+  .Title {
+    margin-bottom: 25px;
+  }
+
+  .Meta {
+    .post-metas {
+      list-style: none;
+      margin: 0 .8em;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .Right {
+    @extend .pull-right;
+    line-height: 51px;
+
+    li {
+      display: inline-block;
+      margin: 0 .25em;
+      color: #888;
+    }
+  }
+
+  .Author {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+
+    a {
+      font-size: 1.1em;
+      font-weight: 500;
+    }
+  }
+
+  .Inner {
+    padding: 1.5em 1em;
+
+    article {
+      font-size: 16px;
+      line-height: 1.8em;
+      margin-top: 20px;
+      overflow: hidden;
+
+      img, iframe {
+        max-width: 100%;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0,0,0,.12);
+      }
+    }
+  }
+
+  .Actions {
+    line-height: 51px;
+    position: relative;
+
+    a {
+      font-size: 1.15em;
+    }
+  }
+
+  .Related {
+    clear: both;
+
+    .Related-post {
+      position: relative;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 300px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: .85em 0;
+
+      .title {
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(to bottom, transparent, rgba($primary-dark, .7));
+        padding: 1.5em 0 .5em;
+        width: 100%;
+      }
+
+      h4 {
+        text-align: center;
+        color: #fff;
+      }
+    }
+  }
+
+  .Comments {
+    clear: both;
+    padding: 2em 0;
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+}

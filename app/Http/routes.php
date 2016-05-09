@@ -24,7 +24,16 @@ Route::get('markets', function () {
 
 });
 
-Route::get('posts/{post}.html', 'HomeController@showPost');
+Route::put('comments/like/{comment}', 'PostsController@likeComment');
+
+Route::group([
+    'prefix' => 'posts/{post}.html'
+], function () {
+    Route::get('/', 'PostsController@show');
+    
+    Route::post('comment', 'PostsController@comment');
+    Route::post('comments/{page}', 'PostsController@loadMoreComments');
+});
 
 Route::post('upload', 'HomeController@uploadPicture');
 Route::post('upload/avatar', 'HomeController@uploadAvatar');
