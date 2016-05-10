@@ -7,6 +7,7 @@ use Rebuy\Post;
 use Rebuy\Http\Requests;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
+use Rebuy\Product;
 
 class HomeController extends Controller {
 
@@ -60,5 +61,19 @@ class HomeController extends Controller {
         $request->user()->uploadsAvatar($path);
         
         return $this->successResponse('头像已更新', 'profile');
+    }
+
+    /**
+     * Search for a keyword.
+     * 
+     * @param $keyword
+     * @return mixed
+     */
+    public function search($keyword)
+    {
+        $posts = Post::search($keyword);
+        $products = Product::search($keyword);
+        
+        return view('search', compact('keyword', 'posts', 'products'));
     }
 }

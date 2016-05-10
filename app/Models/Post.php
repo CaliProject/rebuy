@@ -272,4 +272,18 @@ class Post extends Model {
     {
         return number_format($this->viewsCount());
     }
+
+    /**
+     * Search for a specific keyword.
+     * 
+     * @param $keyword
+     * @return mixed
+     */
+    public static function search($keyword)
+    {
+        return static::where('title', 'like', "%{$keyword}%")
+            ->orWhere('body', 'like', "%{$keyword}%")
+            ->latest()
+            ->paginate();
+    }
 }

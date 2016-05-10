@@ -15,4 +15,18 @@ class Product extends Model {
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Search for a specific keyword.
+     * 
+     * @param $keyword
+     * @return mixed
+     */
+    public static function search($keyword)
+    {
+        return static::where('name', 'like', "%{$keyword}%")
+            ->orWhere('description', 'like', "%{$keyword}%")
+            ->latest()
+            ->paginate();
+    }
 }

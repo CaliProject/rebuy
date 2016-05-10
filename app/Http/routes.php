@@ -19,6 +19,7 @@ Route::get('/', 'HomeController@index');
 Route::get('posts', 'PostsController@posts');
 Route::get('videos', 'PostsController@videos');
 Route::get('markets', 'MarketsController@index');
+Route::get('search/{keyword}', 'HomeController@search');
 
 Route::put('comments/like/{comment}', 'PostsController@likeComment');
 

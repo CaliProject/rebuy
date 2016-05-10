@@ -13,6 +13,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        $this->passThroughIndex();
         $this->passThroughCarousel();
         $this->passThroughAdminVariables();
     }
@@ -38,6 +39,27 @@ class ViewComposerServiceProvider extends ServiceProvider {
             ]);
         });
     }
+
+    /**
+     * Pass thru the index view variables.
+     */
+    protected function passThroughIndex()
+    {
+        view()->composer("welcome", function ($view) {
+            $videos = \Rebuy\Post::latest()->videosOnly()->take(6)->get();
+            $posts = \Rebuy\Post::latest()->postsOnly()->take(12)->get();
+
+            $leftPosts = array_flatten(array_where($posts, function ($key, $value) {
+                return $key % 2 === 0;
+            }));
+            $rightPosts = array_flatten(array_where($posts, function ($key, $value) {
+                return $key % 2 !== 0;
+            }));
+
+            return $view->with(compact('videos', 'leftPosts', 'rightPosts'));
+        });
+    }
+
     /**
      * Pass thru the admin variables.
      */
@@ -63,14 +85,14 @@ class ViewComposerServiceProvider extends ServiceProvider {
                 'comments' => \Rebuy\Comment::latest()->paginate()
             ]);
         });
-        
+
         // Media
         view()->composer("manage.media.index", function ($view) {
             return $view->with([
                 'media' => \Rebuy\Media::latest()->paginate()
             ]);
         });
-        
+
         // Products
         view()->composer("manage.products.index", function ($view) {
             return $view->with([

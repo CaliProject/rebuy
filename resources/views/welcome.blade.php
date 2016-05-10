@@ -14,72 +14,19 @@
                 </div>
             </div>
             <div class="section-content">
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/macbook.jpg') }}')"></div>
+                @foreach($videos as $video)
+                    <div class="post video-post">
+                        <a href="{{ $video->link() }}">
+                            <div class="cover">
+                                <div class="thumbnail-wrapper">
+                                    <div class="thumbnail" style="background-image: url('{{ $video->coverImage() }}')"></div>
+                                </div>
+                                <div class="play-icon"></div>
                             </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">在MacBook上访问</h4>
-                    </a>
-                </div>
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/huawei_p8.jpg') }}')"></div>
-                            </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">正式登录华为P8</h4>
-                    </a>
-                </div>
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/android-1.jpg') }}')"></div>
-                            </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">安卓客户端测试1</h4>
-                    </a>
-                </div>
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/android-2.jpg') }}')"></div>
-                            </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">安卓客户端测试2</h4>
-                    </a>
-                </div>
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/android-4.jpg') }}')"></div>
-                            </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">安卓客户端测试3</h4>
-                    </a>
-                </div>
-                <div class="post video-post">
-                    <a href="#">
-                        <div class="cover">
-                            <div class="thumbnail-wrapper">
-                                <div class="thumbnail" style="background-image: url('{{ url('assets/images/android5.jpg') }}')"></div>
-                            </div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <h4 class="post-title">安卓客户端测试4</h4>
-                    </a>
-                </div>
+                            <h4 class="post-title">{{ str_limit($video->title, 35) }}</h4>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </section>
         <section class="row blogs">
@@ -94,66 +41,46 @@
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
-                                <a href="#">
-                                    <div class="thumbnail" style="background-image: url('{{ url('assets/images/android-3.jpg') }}')"></div>
-                                    <span class="post-title">一个大大的标题</span>
-                                    <time class="pull-right">35分钟前</time>
+                                <a href="{{ ($left = array_pull($leftPosts, 0))->link() }}">
+                                    <div class="thumbnail" style="background-image: url('{{ $left->coverImage() }}')"></div>
+                                    <span class="post-title">{{ $left->title }}</span>
+                                    <time class="pull-right">{{ $left->created_at->diffForHumans() }}</time>
                                 </a>
                             </div>
                         </li>
-                        <li class="blog-item">
-                            <div class="post blog-post">
-                                <a href="#">
-                                    <span class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                                    <time class="pull-right">5分钟前</time>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="blog-item">
-                            <div class="post blog-post">
-                                <a href="#">
-                                    <span class="post-title">Assumenda, at deserunt eius, et illum iusto magni.</span>
-                                    <time class="pull-right">1小时前</time>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="blog-item">
-                            <div class="post blog-post">
-                                <a href="#">
-                                    <span class="post-title">Beatae esse molestias natus quaerat, quas sit.</span>
-                                    <time class="pull-right">2天前</time>
-                                </a>
-                            </div>
-                        </li>
+                        @foreach($leftPosts as $post)
+                            <li class="blog-item">
+                                <div class="post blog-post">
+                                    <a href="{{ $post->link() }}">
+                                        <span class="post-title">{{ $post->title }}</span>
+                                        <time class="pull-right">{{ $post->created_at->diffForHumans() }}</time>
+                                    </a>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="right-side">
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
-                                <a href="#">
-                                    <div class="thumbnail" style="background-image: url('{{ url('assets/images/android-1.jpg') }}')"></div>
-                                    <span class="post-title">一个小小的标题</span>
-                                    <time class="pull-right">15分钟前</time>
+                                <a href="{{ ($right = array_pull($rightPosts, 0))->link() }}">
+                                    <div class="thumbnail" style="background-image: url('{{ $right->coverImage() }}')"></div>
+                                    <span class="post-title">{{ $right->title }}</span>
+                                    <time class="pull-right">{{ $right->created_at->diffForHumans() }}</time>
                                 </a>
                             </div>
                         </li>
-                        <li class="blog-item">
-                            <div class="post blog-post">
-                                <a href="#">
-                                    <span class="post-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-                                    <time class="pull-right">53分钟前</time>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="blog-item">
-                            <div class="post blog-post">
-                                <a href="#">
-                                    <span class="post-title">Assumenda, at deserunt eius, et illum iusto magni.</span>
-                                    <time class="pull-right">3小时前</time>
-                                </a>
-                            </div>
-                        </li>
+                        @foreach($rightPosts as $post)
+                            <li class="blog-item">
+                                <div class="post blog-post">
+                                    <a href="{{ $post->link() }}">
+                                        <span class="post-title">{{ $post->title }}</span>
+                                        <time class="pull-right">{{ $post->created_at->diffForHumans() }}</time>
+                                    </a>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

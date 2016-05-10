@@ -210,7 +210,22 @@
 }
 
 .Posts {
+  .post-type {
+    margin-left: 1em;
+    padding: .2em .5em;
+    border-radius: 5px;
+    font-weight: 500;
 
+    &[post-type=文章] {
+      background: #eee;
+      color: #337ab7;
+    }
+
+    &[post-type=视频] {
+      background: #2f8fee;
+      color: #fff;
+    }
+  }
 }
 
 .posts-list {
