@@ -94,7 +94,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
         });
 
         // Products
-        view()->composer("manage.products.index", function ($view) {
+        view()->composer("manage.markets.index", function ($view) {
             return $view->with([
                 'products' => \Rebuy\Product::latest()->paginate()
             ]);

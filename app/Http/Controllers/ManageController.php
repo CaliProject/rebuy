@@ -3,6 +3,7 @@
 namespace Rebuy\Http\Controllers;
 
 use Rebuy\Post;
+use Rebuy\Product;
 use Rebuy\User;
 use Rebuy\Media;
 use Rebuy\Comment;
@@ -229,5 +230,42 @@ class ManageController extends Controller {
         });
 
         return $this->successResponse('更新成功');
+    }
+
+    /**
+     * Show view for creating a product.
+     * 
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showCreateProduct()
+    {
+        return view('manage.markets.create', ['product' => new Product]);
+    }
+
+    public function createProduct(Request $request)
+    {
+        
+    }
+
+    public function showEditProduct(Product $product)
+    {
+        
+    }
+
+    public function updateProduct(Product $product, Request $request)
+    {
+        
+    }
+    
+    /**
+     * Deletes a product.
+     *
+     * @param Product $product
+     * @return array
+     * @throws \Exception
+     */
+    public function deleteProduct(Product $product)
+    {
+        return $product->delete() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
     }
 }

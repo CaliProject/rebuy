@@ -11,9 +11,9 @@ class Product extends Model {
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -28,5 +28,45 @@ class Product extends Model {
             ->orWhere('description', 'like', "%{$keyword}%")
             ->latest()
             ->paginate();
+    }
+
+    /**
+     * Get the short name.
+     * 
+     * @return string
+     */
+    public function shortName()
+    {
+        return str_limit($this->name, 20);
+    }
+
+    /**
+     * Get the product link.
+     * 
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function link()
+    {
+        return url("markets/products/{$this->id}.html");
+    }
+
+    /**
+     * Get the inventory string.
+     *
+     * @return string
+     */
+    public function inventory()
+    {
+        return number_format($this->inventory);
+    }
+
+    /**
+     * Get the price string.
+     *
+     * @return string
+     */
+    public function price()
+    {
+        return number_format($this->price);
     }
 }

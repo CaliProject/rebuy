@@ -37,6 +37,12 @@ Route::group([
     Route::post('comments/{page}', 'PostsController@loadMoreComments');
 });
 
+Route::group([
+    'prefix' => 'markets/products/{product}.html'
+], function () {
+    Route::get('/', 'MarketsController@show');
+});
+
 Route::post('upload', 'HomeController@uploadPicture');
 Route::post('upload/avatar', 'HomeController@uploadAvatar');
 
