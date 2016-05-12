@@ -2,13 +2,13 @@
 
 namespace Rebuy\Http\Controllers;
 
-use Rebuy\Media;
+use Rebuy\Tag;
 use Rebuy\Post;
+use Rebuy\Media;
+use Rebuy\Product;
 use Rebuy\Http\Requests;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
-use Rebuy\Product;
-use Rebuy\Tag;
 
 class HomeController extends Controller {
 

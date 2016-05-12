@@ -13,3 +13,4 @@
         <i class="fa fa-angle-up"></i>
     </div>
 </aside>
+@stack('footer')

@@ -2,11 +2,11 @@
 
 namespace Rebuy\Http\Controllers;
 
+use Rebuy\View;
 use Rebuy\Post;
 use Rebuy\Comment;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
-use Rebuy\View;
 
 class PostsController extends Controller {
 

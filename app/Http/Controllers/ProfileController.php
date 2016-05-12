@@ -2,6 +2,7 @@
 
 namespace Rebuy\Http\Controllers;
 
+use Rebuy\User;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
 
@@ -17,6 +18,19 @@ class ProfileController extends Controller {
     public function index()
     {
         return view('profile.index');
+    }
+
+    /**
+     * Show the profile page.
+     * 
+     * @param $name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($name)
+    {
+        $user = User::getUserByName($name);
+        
+        return view('profile.show', compact('user'));
     }
 
     /**

@@ -65,6 +65,16 @@ class User extends Authenticatable {
     }
 
     /**
+     * Get the user's comments.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Get the user's media.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -72,6 +82,16 @@ class User extends Authenticatable {
     public function media()
     {
         return $this->hasMany(Media::class);
+    }
+
+    /**
+     * Get the user's products.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     /**
@@ -181,5 +201,16 @@ class User extends Authenticatable {
     public function likePost(Post $post)
     {
         $post->likes()->create(['user_id' => $this->id]);
+    }
+
+    /**
+     * Get the user by his/hers name.
+     * 
+     * @param $name
+     * @return mixed
+     */
+    public static function getUserByName($name)
+    {
+        return static::where('name', str_replace('%20', ' ', $name))->first();
     }
 }

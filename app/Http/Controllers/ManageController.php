@@ -2,11 +2,11 @@
 
 namespace Rebuy\Http\Controllers;
 
-use Rebuy\Configuration;
 use Rebuy\Post;
 use Rebuy\User;
 use Rebuy\Media;
 use Rebuy\Comment;
+use Rebuy\Configuration;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
 use Rebuy\Http\Requests\PostFormRequest;

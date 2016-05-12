@@ -16,7 +16,7 @@
             <div class="Meta">
                 <div class="Author">
                     <img src="{{ $post->author->avatarUrl() }}" alt="{{ $post->author->name }}的头像" class="avatar">
-                    <a href="#">{{ $post->author->name }}</a>
+                    <a href="{{ $post->author->profileLink() }}">{{ $post->author->name }}</a>
                 </div>
                 <div class="Right">
                     <ul class="post-metas">

@@ -16,6 +16,8 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('@{name}', 'ProfileController@show');
+
 Route::get('posts', 'PostsController@posts');
 Route::get('videos', 'PostsController@videos');
 Route::get('markets', 'MarketsController@index');
