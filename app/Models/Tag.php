@@ -25,4 +25,14 @@ class Tag extends Model {
     {
         return static::where('name', $name)->first();
     }
+
+    /**
+     * Get the url of the tag.
+     * 
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function link()
+    {
+        return url("tag/" . str_replace(' ', '+', $this->name));
+    }
 }

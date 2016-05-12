@@ -8,6 +8,7 @@ use Rebuy\Http\Requests;
 use Illuminate\Http\Request;
 use Rebuy\Library\Traits\APIResponse;
 use Rebuy\Product;
+use Rebuy\Tag;
 
 class HomeController extends Controller {
 
@@ -75,5 +76,18 @@ class HomeController extends Controller {
         $products = Product::search($keyword);
         
         return view('search', compact('keyword', 'posts', 'products'));
+    }
+
+    /**
+     * Show view for a tag.
+     * 
+     * @param $tag
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showTag($tag)
+    {
+        $tag = Tag::getByName($tag);
+        
+        return view('tags.show', compact('tag'));
     }
 }

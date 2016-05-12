@@ -151,4 +151,35 @@ class User extends Authenticatable {
     {
         return in_array($comment->id, array_flatten($this->likedComments()->toArray()));
     }
+
+    /**
+     * User's liked posts.
+     *
+     * @return mixed
+     */
+    public function likedPosts()
+    {
+        return $this->likes()->where('likeable_type', Post::class)->get(['likeable_id']);
+    }
+
+    /**
+     * If the user has liked the given post.
+     * 
+     * @param Post $post
+     * @return bool
+     */
+    public function likedPost(Post $post)
+    {
+        return in_array($post->id, array_flatten($this->likedPosts()->toArray()));
+    }
+
+    /**
+     * Like a post.
+     *
+     * @param Post $post
+     */
+    public function likePost(Post $post)
+    {
+        $post->likes()->create(['user_id' => $this->id]);
+    }
 }

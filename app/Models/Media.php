@@ -33,13 +33,13 @@ class Media extends Model {
      * @param bool    $encrypt
      * @return string
      */
-    public static function upload(Request $request, $prefix, $encrypt = true)
+    public static function upload(Request $request, $prefix = '', $encrypt = true)
     {
         $file = $request->file('image');
         $path = $encrypt ? 
             sha1(time() . str_random() . $file->getFilename()) . '.' . $file->getClientOriginalExtension() :
             str_singular($prefix) . '.' . $file->getClientOriginalExtension();
-        $file->move('uploads/' . ($prefix ? $prefix . '/' . $request->user()->id : ''), $path);
+        $file->move('uploads/' . ($prefix == '' ?: $prefix . '/' . $request->user()->id), $path);
 
         return $path;
     }

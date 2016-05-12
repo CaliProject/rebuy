@@ -48,7 +48,7 @@
                             <div class="content-style-text">
                                 <span class="icon-close">关闭</span>
                                 <h2>用户注册条款</h2>
-                                <p>Pea horseradish azuki bean lettuce avocado asparagus okra. Chickweed okra pea winter purslane coriander yarrow sweet pepper radish garlic brussels sprout groundnut summer purslane earthnut pea <strong>tomato spring onion</strong> azuki bean gourd.</p>
+                                <p>{!! Conf::termsConditions() !!}</p>
                                 <p><input id="terms" name="terms" type="checkbox" required /><label for="terms">我已阅读 &amp; 接受该条款.</label></p>
                             </div>
                         </div>

@@ -23,10 +23,13 @@ Route::get('search/{keyword}', 'HomeController@search');
 
 Route::put('comments/like/{comment}', 'PostsController@likeComment');
 
+Route::get('tag/{tag}', 'HomeController@showTag');
+
 Route::group([
     'prefix' => 'posts/{post}.html'
 ], function () {
     Route::get('/', 'PostsController@show');
+    Route::patch('/', 'PostsController@likePost');
     
     Route::post('comment', 'PostsController@comment');
     Route::post('comments/{page}', 'PostsController@loadMoreComments');
@@ -90,4 +93,6 @@ Route::group([
         Route::patch('{product}', 'ManageController@updateProduct');
         Route::delete('{product}', 'ManageController@deleteProduct');
     });
+    
+    Route::patch('extras', 'ManageController@updateExtra');
 });

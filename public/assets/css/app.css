@@ -6748,6 +6748,59 @@ li.on:after {
   .posts-list time {
     color: #aaa; }
 
+.Tags {
+  clear: both; }
+  .Tags .tag-list {
+    list-style: none;
+    padding: 15px 0; }
+    .Tags .tag-list:before, .Tags .tag-list:after {
+      display: table;
+      content: '';
+      clear: both; }
+    .Tags .tag-list li {
+      float: left;
+      margin-left: 25px;
+      background: #4CA927;
+      margin-top: 1em;
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+      position: relative; }
+      .Tags .tag-list li a {
+        width: 100%;
+        display: block;
+        color: #fff;
+        padding: 2.5px 10px;
+        font-weight: 500; }
+      .Tags .tag-list li:before {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border: 12.5px solid transparent;
+        border-right-color: #4CA927;
+        left: -24px;
+        top: 0; }
+      .Tags .tag-list li:after {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 4px;
+        height: 4px;
+        background-color: #fff;
+        left: -2px;
+        top: 10px;
+        border-radius: 4px; }
+
+.Video {
+  clear: both;
+  padding: 1em 0; }
+  .Video video {
+    max-width: 100%;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px; }
+
 .blogs .blog-list {
   list-style: none;
   padding-left: 10px; }

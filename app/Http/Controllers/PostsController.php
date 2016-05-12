@@ -59,6 +59,12 @@ class PostsController extends Controller {
         $post->views()->save(new View);
         $comments = $post->superComments()->paginate($this->perPage);
 
+        if ($post->type === 1) {
+            $video = true;
+            
+            return view('posts.show', compact('post', 'comments', 'video'));
+        }
+
         return view('posts.show', compact('post', 'comments'));
     }
 
@@ -118,6 +124,21 @@ class PostsController extends Controller {
 
         return $this->successResponse([
             "html" => view('posts.partials.comments', compact('comments'))->render()
+        ]);
+    }
+
+    /**
+     * Like a post.
+     * 
+     * @param Post $post
+     * @return array
+     */
+    public function likePost(Post $post, Request $request)
+    {
+        $request->user()->likePost($post);
+        
+        return $this->successResponse([
+            'likes' => $post->likesCount()
         ]);
     }
 }

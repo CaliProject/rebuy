@@ -204,6 +204,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         
         'Stat' => Rebuy\Library\Facades\Stat::class,
+        'Conf' => Rebuy\Library\Facades\Conf::class
 
     ],
 

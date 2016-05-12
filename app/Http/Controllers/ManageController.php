@@ -2,6 +2,7 @@
 
 namespace Rebuy\Http\Controllers;
 
+use Rebuy\Configuration;
 use Rebuy\Post;
 use Rebuy\User;
 use Rebuy\Media;
@@ -212,5 +213,21 @@ class ManageController extends Controller {
     public function deleteMedia(Media $media)
     {
         return $media->trash() ? $this->successResponse('删除成功') : $this->errorResponse('删除失败');
+    }
+
+    /**
+     * Updates extra settings.
+     * 
+     * @param Request $request
+     * @return array
+     */
+    public function updateExtra(Request $request)
+    {
+        $arr = $request->except(['_token', '_method']);
+        array_walk($arr, function ($value, $key) {
+            Configuration::__callStatic(camel_case($key), [$value]);
+        });
+
+        return $this->successResponse('更新成功');
     }
 }

@@ -21,8 +21,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li{{ request()->is('/') ? ' class=on' : '' }}><a href="{{ url('/') }}">主页</a></li>
-                <li{{ request()->is('posts*') ? ' class=on' : '' }}><a href="{{ url('posts') }}">文章</a></li>
-                <li{{ request()->is('videos*') ? ' class=on' : '' }}><a href="{{ url('videos') }}">视频</a></li>
+                <li{{ request()->is('posts*') && !isset($video) ? ' class=on' : '' }}><a href="{{ url('posts') }}">文章</a></li>
+                <li{{ request()->is('videos*') || (isset($video) && $video === true) ? ' class=on' : '' }}><a href="{{ url('videos') }}">视频</a></li>
                 <li{{ request()->is('markets*') ? ' class=on' : '' }}><a href="{{ url('markets') }}">商城</a></li>
                 <li>
                     <div class="search-bar">

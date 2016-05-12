@@ -99,5 +99,12 @@ class ViewComposerServiceProvider extends ServiceProvider {
                 'products' => \Rebuy\Product::latest()->paginate()
             ]);
         });
+        
+        // Extras
+        view()->composer("manage.extras.index", function ($view) {
+            return $view->with([
+                'conf' => new \Rebuy\Configuration
+            ]);
+        });
     }
 }

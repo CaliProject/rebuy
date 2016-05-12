@@ -3,7 +3,7 @@
 @section('title', $post->title)
 
 @section('breadcrumb')
-    <li><a href="{{ url('posts') }}">文章</a></li>
+    <li><a href="{{ isset($video) ? url('videos') : url('posts') }}">{{ isset($video) ? '视频' : '文章' }}</a></li>
     <li class="active">{{ $post->title }}</li>
 @stop
 
@@ -35,6 +35,20 @@
         </div>
         <hr>
         <div class="Article">
+            @if($post->type == 1)
+                <div class="Video">
+                    <video src="{{ $post->video_src }}" preload="auto" controls></video>
+                </div>
+            @endif
+            <div class="Tags">
+                <ul class="tag-list">
+                    @foreach($post->tags as $tag)
+                        <li>
+                            <a href="{{ $tag->link() }}">{{ $tag->name }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="Inner">
                 <article>
                     {!! $post->body !!}
@@ -44,15 +58,15 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="icon-share"></i>&nbsp;分享</a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="#"><i class="fa fa-qq"></i>&nbsp;QQ空间</a>
-                        <a href="#"><i class="fa fa-weibo"></i>&nbsp;新浪微博</a>
+                        <a href="http://connect.qq.com/widget/shareqq/index.html?url={{ url()->current() }}&title={{ urlencode($post->title) }}&desc={{ urlencode(str_limit($post->body, 35)) }}"><i class="fa fa-qq"></i>&nbsp;QQ好友</a>
+                        <a href="http://service.weibo.com/share/share.php?url={{ url()->current() }}&title={{ urlencode($post->title) }}&appkey=1343713053&searchPic=true"><i class="fa fa-weibo"></i>&nbsp;新浪微博</a>
                     </li>
                 </ul>
                 @if(Auth::check())
                     <div class="Right">
                         <ul>
                             <li>
-                                <a href="javascript:;"><i class="icon-like"></i>&nbsp;点赞 ({{ $post->likesCount() }})</a>
+                                <a href="javascript:;" id="post-like-btn"{{ ($liked = Auth::user()->likedPost($post)) ? ' class=liked' : '' }}><i class="{{ $liked ? 'fa fa-thumbs-up' : 'icon-like' }}"></i>&nbsp;点赞 ({{ $post->likesCount() }})</a>
                             </li>
                         </ul>
                     </div>

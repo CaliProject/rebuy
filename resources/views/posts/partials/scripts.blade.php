@@ -24,6 +24,23 @@
             });
         });
 
+        $("#post-like-btn:not(.liked)").on('click', function (ev) {
+            var $btn = ev.target;
+
+            $.ajax({
+                url: "{{ url()->current() }}",
+                type: 'PATCH',
+                data: {_token:$_token},
+                success: function (data) {
+                    if (data.status == 'success') {
+                        $($btn).addClass('liked');
+                        $($btn).html("<i class='fa fa-thumbs-up'></i>&nbsp;点赞 (" + data.likes + ")");
+                        $($btn).off('click');
+                    }
+                }
+            });
+        });
+
         function initEvents() {
             // Like buttons
             $('a#like-button').each(function () {
