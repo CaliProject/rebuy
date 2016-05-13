@@ -84,10 +84,10 @@ class HomeController extends Controller {
      * @param $tag
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showTag($tag)
+    public function showTag($type, $tag)
     {
         $tag = Tag::getByName($tag);
-        
-        return view('tags.show', compact('tag'));
+
+        return view('tags.' . $type . '-show', compact('tag'));
     }
 }

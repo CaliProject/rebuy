@@ -1,9 +1,10 @@
 @extends('layouts.content')
 
-@section('title', '商城')
+@section('title', '标签' . $tag->name)
 
 @section('breadcrumb')
-    <li class="active">商城</li>
+    <li><a href="{{ url('markets') }}">商城</a></li>
+    <li class="active">标签 「{{ $tag->name }}」</li>
 @stop
 
 @section('content.main')
@@ -18,7 +19,7 @@
     </div>
     <div class="Products">
         <div class="product-list">
-            @foreach($products as $i => $product)
+            @foreach(($products = $tag->paginatedProducts()) as $product)
                 <div class="product-item">
                     <a href="{{ $product->link() }}">
                         <div class="cover">
@@ -42,7 +43,7 @@
                 </div>
             @endforeach
         </div>
-        <div class="clearfix text-center" style="clear: both;">
+        <div class="row text-center">
             {!! $products->links() !!}
         </div>
     </div>

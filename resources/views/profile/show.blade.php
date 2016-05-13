@@ -73,6 +73,31 @@
                 <div class="line-title">
                     <h3>Ta发布的商品 <i class="icon-handbag"></i></h3>
                 </div>
+                <div class="product-list">
+                    @foreach($user->products()->latest()->take(4)->get() as $product)
+                        <div class="product-item">
+                            <a href="{{ $product->link() }}">
+                                <div class="cover">
+                                    <div class="thumbnail" style="background-image: url('{{ $product->coverImage() }}')"></div>
+                                </div>
+                                <div class="details">
+                                    <div class="product-name">
+                                        <span>{{ $product->name }}</span>
+                                    </div>
+                                    <div class="product-price">
+                                        {{ $product->priceForView() }}
+                                    </div>
+                                    <div class="product-inventory">
+                                        库存: {{ $product->inventoryForView() }}
+                                    </div>
+                                    <div class="product-date">
+                                        <time>{{ $product->created_at->diffForHumans() }}</time>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('inventory');
             $table->text('metas');
             $table->longText('description');
+            $table->unsignedInteger('cover_id')->nullable();
             $table->timestamps();
         });
     }

@@ -48,6 +48,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
         view()->composer("welcome", function ($view) {
             $videos = \Rebuy\Post::latest()->videosOnly()->take(6)->get();
             $posts = \Rebuy\Post::latest()->postsOnly()->take(12)->get();
+            $products = \Rebuy\Product::latest()->take(12)->get();
 
             $leftPosts = array_flatten(array_where($posts, function ($key, $value) {
                 return $key % 2 === 0;
@@ -56,7 +57,20 @@ class ViewComposerServiceProvider extends ServiceProvider {
                 return $key % 2 !== 0;
             }));
 
-            return $view->with(compact('videos', 'leftPosts', 'rightPosts'));
+            return $view->with(compact('videos', 'leftPosts', 'rightPosts', 'products'));
+        });
+
+        view()->composer("tags.product-show", function ($view) {
+            $tags = \Rebuy\Tag::productsAssociated();
+
+            return $view->with(compact('tags'));
+        });
+
+        view()->composer("markets", function ($view) {
+            $products = \Rebuy\Product::latest()->paginate(40);
+            $tags = \Rebuy\Tag::productsAssociated();
+
+            return $view->with(compact('products' , 'tags'));
         });
     }
 

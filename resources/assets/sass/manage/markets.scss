@@ -1,0 +1,23 @@
+.metas {
+  margin-top: 1em;
+
+  .row {
+    clear: both;
+    position: relative;
+    margin: .7em 0;
+  }
+
+  .del {
+    position: absolute;
+    left: -15px;
+    top: 10px;
+    color: red;
+    cursor: pointer;
+    pointer-events: all;
+    outline: none;
+
+    i {
+      pointer-events: none;
+    }
+  }
+}

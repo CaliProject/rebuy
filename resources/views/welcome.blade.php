@@ -94,29 +94,29 @@
             </div>
             <div class="section-content">
                 <div class="product-list">
-                    @for($i = 1; $i <= 6; $i++)
+                    @foreach($products as $product)
                         <div class="product-item">
-                            <a href="#">
+                            <a href="{{ $product->link() }}">
                                 <div class="cover">
-                                    <div class="thumbnail" style="background-image: url('{{ url('assets/images/iphone' . $i . '.jpg') }}')"></div>
+                                    <div class="thumbnail" style="background-image: url('{{ $product->coverImage() }}')"></div>
                                 </div>
                                 <div class="details">
                                     <div class="product-name">
-                                        <span>iPhone 6s 64GB 银色</span>
+                                        <span>{{ $product->name }}</span>
                                     </div>
                                     <div class="product-price">
-                                        5099.00
+                                        {{ $product->priceForView() }}
                                     </div>
                                     <div class="product-inventory">
-                                        库存: 3
+                                        库存: {{ $product->inventoryForView() }}
                                     </div>
                                     <div class="product-date">
-                                        <time>{{ $i }}小时前</time>
+                                        <time>{{ $product->created_at->diffForHumans() }}</time>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </section>

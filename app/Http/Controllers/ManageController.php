@@ -242,19 +242,48 @@ class ManageController extends Controller {
         return view('manage.markets.create', ['product' => new Product]);
     }
 
+    /**
+     * Creates a product.
+     *
+     * @param Request $request
+     * @return array
+     */
     public function createProduct(Request $request)
     {
-        
+        $product = $request->user()->products()->create($request->all());
+        $product->saveTags($request->input('tags'));
+        $product->saveMetas($request->input('meta_key'), $request->input('meta_val'));
+
+        return $this->successResponse([
+            'redirect' => url('manage/markets')
+        ]);
     }
 
+    /**
+     * Show view for editing a product.
+     * 
+     * @param Product $product
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showEditProduct(Product $product)
     {
-        
+        return view('manage.markets.edit', compact('product'));
     }
 
+    /**
+     * Updates a product.
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return array
+     */
     public function updateProduct(Product $product, Request $request)
     {
-        
+        $product->update($request->only($product->getFillable()));
+        $product->saveTags($request->input('tags'));
+        $product->saveMetas($request->input('meta_key'), $request->input('meta_val'));
+
+        return $this->successResponse('商品更新成功');
     }
     
     /**

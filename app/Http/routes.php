@@ -25,7 +25,7 @@ Route::get('search/{keyword}', 'HomeController@search');
 
 Route::put('comments/like/{comment}', 'PostsController@likeComment');
 
-Route::get('tag/{tag}', 'HomeController@showTag');
+Route::get('tag/{type}/{tag}', 'HomeController@showTag');
 
 Route::group([
     'prefix' => 'posts/{post}.html'

@@ -1,5 +1,6 @@
 .product-list {
   margin: 1em 0;
+  background: #fff;
 
   .product-item {
     @extend .col-md-3, .col-sm-4, .col-xs-6;
@@ -8,6 +9,14 @@
     border: none;
     border-radius: 6px;
     @include ts();
+
+    &:nth-child(4n) {
+      clear: right;
+    }
+
+    &:nth-child(4n + 1) {
+      clear: left;
+    }
 
     &:hover {
       box-shadow: 0 0 2px $primary-light-hover;

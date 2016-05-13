@@ -39,7 +39,7 @@ class Media extends Model {
         $path = $encrypt ? 
             sha1(time() . str_random() . $file->getFilename()) . '.' . $file->getClientOriginalExtension() :
             str_singular($prefix) . '.' . $file->getClientOriginalExtension();
-        $file->move('uploads/' . ($prefix == '' ?: $prefix . '/' . $request->user()->id), $path);
+        $file->move('uploads/' . ($prefix === '' ? $prefix : ($prefix . '/' . $request->user()->id)), $path);
 
         return $path;
     }

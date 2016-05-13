@@ -27,8 +27,8 @@
                         <td>
                             <a href="{{ $product->link() }}" target="_blank">{{ $product->shortName() }}</a>
                         </td>
-                        <td>{{ $product->inventory() }}</td>
-                        <td>￥{{ $product->price() }}</td>
+                        <td>{{ $product->inventoryForView() }}</td>
+                        <td>￥{{ $product->priceForView() }}</td>
                         <td>{{ $product->updated_at->diffForHumans() }}</td>
                         <td class="text-center">
                             <a href="#" class="edit-btn">
