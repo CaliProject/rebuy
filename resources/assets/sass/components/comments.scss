@@ -125,7 +125,7 @@
   list-style: none;
 
   &:nth-child(n) {
-    margin-left: 40px;
+    margin-left: 40px !important;
   }
 
   &:first-child {
