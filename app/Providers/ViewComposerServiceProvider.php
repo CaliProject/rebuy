@@ -57,7 +57,10 @@ class ViewComposerServiceProvider extends ServiceProvider {
                 return $key % 2 !== 0;
             }));
 
-            return $view->with(compact('videos', 'leftPosts', 'rightPosts', 'products'));
+            $left = array_pull($leftPosts, 0);
+            $right = array_pull($rightPosts, 0);
+
+            return $view->with(compact('videos', 'leftPosts', 'rightPosts', 'products', 'left', 'right'));
         });
 
         view()->composer("tags.product-show", function ($view) {

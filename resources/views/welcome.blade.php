@@ -41,7 +41,7 @@
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
-                                <a href="{{ ($left = array_pull($leftPosts, 0))->link() }}">
+                                <a href="{{ $left->link() }}">
                                     <div class="thumbnail" style="background-image: url('{{ $left->coverImage() }}')"></div>
                                     <span class="post-title">{{ $left->title }}</span>
                                     <time class="pull-right">{{ $left->created_at->diffForHumans() }}</time>
@@ -64,7 +64,7 @@
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
-                                <a href="{{ ($right = array_pull($rightPosts, 0))->link() }}">
+                                <a href="{{ $right->link() }}">
                                     <div class="thumbnail" style="background-image: url('{{ $right->coverImage() }}')"></div>
                                     <span class="post-title">{{ $right->title }}</span>
                                     <time class="pull-right">{{ $right->created_at->diffForHumans() }}</time>
