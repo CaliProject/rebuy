@@ -41,11 +41,13 @@
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
+                                @if(count($leftPosts))
                                 <a href="{{ $left->link() }}">
                                     <div class="thumbnail" style="background-image: url('{{ $left->coverImage() }}')"></div>
                                     <span class="post-title">{{ $left->title }}</span>
                                     <time class="pull-right">{{ $left->created_at->diffForHumans() }}</time>
                                 </a>
+                                @endif
                             </div>
                         </li>
                         @foreach($leftPosts as $post)
@@ -64,11 +66,13 @@
                     <ul class="blog-list">
                         <li class="blog-item">
                             <div class="post blog-post sticky-post">
+                                @if(count($rightPosts))
                                 <a href="{{ $right->link() }}">
                                     <div class="thumbnail" style="background-image: url('{{ $right->coverImage() }}')"></div>
                                     <span class="post-title">{{ $right->title }}</span>
                                     <time class="pull-right">{{ $right->created_at->diffForHumans() }}</time>
                                 </a>
+                                @endif
                             </div>
                         </li>
                         @foreach($rightPosts as $post)
