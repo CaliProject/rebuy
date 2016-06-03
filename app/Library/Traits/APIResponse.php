@@ -16,7 +16,12 @@ trait APIResponse {
     protected function successResponse($attributes = [], $to = null)
     {
         if (request()->ajax()) {
-            return $this->ajaxSuccessResponse($attributes);
+            $response = $this->ajaxSuccessResponse($attributes);
+
+            return $to ?
+                array_merge($response, [
+                    'redirect' => str_contains($to, '://') ? $to : url($to)
+                ]) : $response;
         }
 
         return $to ?
@@ -36,7 +41,12 @@ trait APIResponse {
     protected function errorResponse($attributes = [], $to = null)
     {
         if (request()->ajax()) {
-            return $this->ajaxErrorResponse($attributes);
+            $response = $this->ajaxErrorResponse($attributes);
+
+            return $to ?
+                array_merge($response, [
+                    'redirect' => str_contains($to, '://') ? $to : url($to)
+                ]) : $response;
         }
 
         return $to ?
@@ -56,7 +66,7 @@ trait APIResponse {
     {
         return is_string($attributes) ? [
             'status'  => 'success',
-            'message' => $attributes
+            'message' => $attributes,
         ] : array_merge(
             ['status' => 'success',],
             $attributes
