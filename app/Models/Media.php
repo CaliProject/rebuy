@@ -52,8 +52,10 @@ class Media extends Model {
      */
     public function trash()
     {
+        // 删除硬盘中对应的文件
         File::delete('uploads/' . $this->path);
 
+        // 从数据表里删除记录
         return $this->delete();
     }
 

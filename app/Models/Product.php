@@ -126,12 +126,32 @@ class Product extends Model {
     public function saveMetas(array $keys, array $values)
     {
         $metas = [];
+        // $keys = ['哈哈, '弄啥类'];
+        // $values = ['呵呵', '不知道'];
         foreach ($keys as $i => $key) {
+            // $metas[0] = [
+            //  'key' => '哈哈'
+            //  'value' => '呵呵'
+            // ];
+            // $metas[1] = [
+            //  'key' => '弄啥类'
+            //  'value' => '不知道'
+            // ];
+            
             $metas[$i] = [
                 'key'   => $key,
                 'value' => $values[$i]
             ];
         }
+
+        // $metas = [
+        //   [
+        //   '哈哈' => '呵呵'
+        //   ],
+        //   [
+        //   '弄啥类' => '不知道'
+        //   ]
+        //  ]
 
         $this->update(['metas' => json_encode($metas)]);
     }

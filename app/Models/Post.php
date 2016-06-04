@@ -136,6 +136,7 @@ class Post extends Model {
      */
     public function saveTags(array $tags)
     {
+        // 如果不是新文章
         if (count($this->tags)) {
             $this->tags()->detach($this->tags()->lists('id')->toArray());
         }
@@ -154,8 +155,10 @@ class Post extends Model {
     {
         foreach (array_values($tags) as $tag) {
             if ($t = Tag::getByName($tag)) {
+                // 如果该名字的标签存在, 直接关联
                 $this->tags()->attach($t->id);
             } else {
+                // 如果该名字的标签不存在, 创建一条新的记录
                 $this->tags()->create(['name' => $tag]);
             }
         }

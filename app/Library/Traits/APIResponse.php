@@ -15,7 +15,9 @@ trait APIResponse {
      */
     protected function successResponse($attributes = [], $to = null)
     {
+        // 请求是否为ajax
         if (request()->ajax()) {
+            // 获取json数组
             $response = $this->ajaxSuccessResponse($attributes);
 
             return $to ?

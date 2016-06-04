@@ -56,15 +56,20 @@ class PostsController extends Controller {
      */
     public function show(Post $post)
     {
+        // 自增长一个浏览量
         $post->views()->save(new View);
+        // 获取该文章的所有原创评论
         $comments = $post->superComments()->paginate($this->perPage);
 
+        // 判断文章类型
         if ($post->type === 1) {
+            // 文章类型为视频
             $video = true;
             
             return view('posts.show', compact('post', 'comments', 'video'));
         }
 
+        // 文章类型为普通文章
         return view('posts.show', compact('post', 'comments'));
     }
 
@@ -77,11 +82,15 @@ class PostsController extends Controller {
      */
     public function comment(Post $post, Request $request)
     {
+        // 判断是否为回复
         if ($request->input('origin') != 0) {
+            // 是回复, 取出父级评论对象
             $parent = Comment::find($request->input("origin"));
         }
+        // 根据原创与否来决定评论内容
         $body = isset($parent) ? $parent->replyLink() . $request->input('content') : $request->input('content');
 
+        // 写入评论数据表
         $comment = new Comment([
             "post_id" => $post->id,
             "user_id" => $request->user()->id,
@@ -135,6 +144,7 @@ class PostsController extends Controller {
      */
     public function likePost(Post $post, Request $request)
     {
+        // 直接调用发出请求的用户的likePost方法
         $request->user()->likePost($post);
         
         return $this->successResponse([

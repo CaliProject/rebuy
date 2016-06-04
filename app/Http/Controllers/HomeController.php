@@ -40,8 +40,10 @@ class HomeController extends Controller {
      */
     public function uploadPicture(Request $request)
     {
+        // 将文件移动到uploads目录下
         $path = Media::upload($request);
 
+        // 写入媒体数据表
         $request->user()->media()->create(compact('path'));
 
         return $this->successResponse([
@@ -57,8 +59,10 @@ class HomeController extends Controller {
      */
     public function uploadAvatar(Request $request)
     {
+        // 将文件移动到uploads/avatars目录下
         $path = Media::upload($request, 'avatars', false);
 
+        // 写入头像数据表
         $request->user()->uploadsAvatar($path);
         
         return $this->successResponse('头像已更新', 'profile');

@@ -64,7 +64,9 @@ class ManageController extends Controller {
      */
     public function createPost(PostFormRequest $request)
     {
+        // 写入文章数据表, 并关联用户
         $post = $request->user()->posts()->create($request->all());
+        // 关联标签
         $post->saveTags($request->input('tags'));
 
         return $this->successResponse([
@@ -128,6 +130,7 @@ class ManageController extends Controller {
      */
     public function createUser(Request $request)
     {
+        // 验证输入内容
         $this->validate($request, [
             'name'     => 'required|max:255|unique:users',
             'email'    => 'required|email|max:255|unique:users',
@@ -136,9 +139,12 @@ class ManageController extends Controller {
             'role'     => 'in:member,admin'
         ]);
 
+        // 获取可插入的键值对数组
         $attributes = $request->only((new User)->getFillable());
+        // 密码Bcrypt加密
         $attributes['password'] = bcrypt($request->input('password'));
 
+        // 插入数据到用户表
         $user = User::create($attributes);
 
         return $user ? $this->successResponse([
@@ -250,8 +256,11 @@ class ManageController extends Controller {
      */
     public function createProduct(Request $request)
     {
+        // 写入商品数据表, 关联该用户
         $product = $request->user()->products()->create($request->all());
+        // 保存标签关系
         $product->saveTags($request->input('tags'));
+        // 保存元信息
         $product->saveMetas($request->input('meta_key'), $request->input('meta_val'));
 
         return $this->successResponse([

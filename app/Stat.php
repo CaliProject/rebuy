@@ -31,6 +31,8 @@ class Stat {
      */
     public function __call($name, $arguments)
     {
+        // $name = posts
+        // $class = 'Rebuy\\Post'
         $class = __NAMESPACE__ . '\\' . str_singular(strtoupper(substr($name, 0, 1)) . substr($name, 1));
 
         return $class::count();

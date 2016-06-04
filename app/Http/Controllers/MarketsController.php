@@ -26,6 +26,7 @@ class MarketsController extends Controller {
      */
     public function show(Product $product)
     {
+        // 自增长浏览量
         $product->views()->save(new View);
 
         return view('products.show', compact('product'));

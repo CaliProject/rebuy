@@ -11,7 +11,7 @@ trait TimeSortable {
      *
      * @var string
      */
-    protected $columnColumn = self::CREATED_AT;
+    protected $sortColumn = self::CREATED_AT;
 
     /**
      * Scope the query to only today.
@@ -24,6 +24,7 @@ trait TimeSortable {
      */
     public function scopeToday($query, $column = null)
     {
+        // $query->where('created_at, '>=', 今天);
         return $query->where($this->getTimeColumn($column), '>=', Carbon::today());
     }
 
@@ -55,6 +56,7 @@ trait TimeSortable {
      */
     public function scopeLastWeek($query, $column = null)
     {
+        // 过去7天
         return $query->where([
             [$this->getTimeColumn($column), '>=', Carbon::today()->subWeek()],
             [$this->getTimeColumn($column), '<', Carbon::now()]
@@ -72,6 +74,7 @@ trait TimeSortable {
      */
     public function scopeLastFullWeek($query, $column = null)
     {
+        // 上一周
         return $query->where([
             [$this->getTimeColumn($column), '>=', Carbon::today()->startOfWeek()->subWeek()],
             [$this->getTimeColumn($column), '<', Carbon::today()->startOfWeek()]
@@ -138,6 +141,7 @@ trait TimeSortable {
      */
     protected function getTimeColumn($column = null)
     {
+        // 默认用created_at进行排序或过滤
         $this->sortColumn = $column ?: self::CREATED_AT;
 
         return $this->sortColumn ?: 'created_at';
