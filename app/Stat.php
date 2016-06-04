@@ -3,7 +3,7 @@
 namespace Rebuy;
 
 class Stat {
-
+    
     /**
      * Get the count of the scoped users.
      *
@@ -32,8 +32,14 @@ class Stat {
     public function __call($name, $arguments)
     {
         // $name = posts
+        // 目标:
         // $class = 'Rebuy\\Post'
-        $class = __NAMESPACE__ . '\\' . str_singular(strtoupper(substr($name, 0, 1)) . substr($name, 1));
+        
+        // 1. 第一个字母大写 => Posts
+        $class = strtoupper(substr($name, 0, 1)) . substr($name, 1);
+
+        // 2. 从复数转单数 => Rebuy\Post
+        $class = __NAMESPACE__ . '\\' . str_singular($class);
 
         return $class::count();
     }

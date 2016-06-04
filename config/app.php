@@ -205,7 +205,6 @@ return [
         
         'Stat' => Rebuy\Library\Facades\Stat::class,
         'Conf' => Rebuy\Library\Facades\Conf::class
-
     ],
 
 ];
